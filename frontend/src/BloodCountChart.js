@@ -86,7 +86,7 @@ function BloodCountChart() {
     
   {bloodCounts.map((bloodCountno, index) => (
     console.log(bloodCountno),
-    <div key={index} >
+    <div key={index} className="numberborder">
       <span className="bloodtypes">{bloodCountno.name}</span>
       <input className="bloodlabels"
         type="number"
