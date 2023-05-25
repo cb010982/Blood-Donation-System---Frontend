@@ -18,7 +18,7 @@ const bloodBankSchema = new Schema({
         type:String
     },
     telephone:{
-        type:Number
+        type:String
     },
     address:{
         type:String
