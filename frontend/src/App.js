@@ -12,14 +12,51 @@ import Acceptedrequests from './Acceptedrequests';
 import Pendingrequests from './Pendingrequests';
 import FAQs from './FAQs';
 import Search from './Search';
+import LoginAndSignUp from './LoginAndSignUp';
 
 
 function App() {
   return (
     <Router>
       <Route exact path='/'>
-      <Dashboards/>
+        <Navigation user="home"/>
+        <LoginAndSignUp page="donorSignup"/>
       </Route>
+    <Route path='/donorLoginPage'>
+       <Navigation user="home"/>
+       <LoginAndSignUp page="donorLogin"/>
+    </Route>
+    <Route path='/adminLoginPage'>
+       <Navigation user="home"/>
+      <LoginAndSignUp page="adminLogin"/>
+    </Route>
+    <Route path='/hospitalLoginPage'>
+       <Navigation user="home"/>
+       <LoginAndSignUp page="hospitalLogin"/>
+    </Route>
+   <Route path='/bloodBankLoginPage'>
+      <Navigation user="home"/>
+      <LoginAndSignUp page="bloodBankLogin"/>
+   </Route>
+   <Route path='/donorSignUpPage'>
+      <Navigation user="home"/>
+      <LoginAndSignUp page="donorSignup"/>
+   </Route>
+   <Route path='/adminSignUpPage'>
+     <Navigation user="home"/>
+     <LoginAndSignUp page="adminSignup"/>
+   </Route>
+  <Route path='/hospitalSignUpPage'>
+     <Navigation user="home"/>
+     <LoginAndSignUp page="hospitalSignup"/>
+  </Route>
+  <Route path='/bloodBankSignUpPage'>
+      <Navigation user="home"/>
+      <LoginAndSignUp page="bloodBankSignup"/>
+  </Route>
+      {/*<Route exact path='/'>
+      <Dashboards/>
+  </Route>*/}
       <Route path='/Location1'>
         <Location1/>
       </Route>
