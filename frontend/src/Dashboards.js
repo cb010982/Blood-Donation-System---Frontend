@@ -177,7 +177,7 @@ function Dashboards(props) {
    BLOODBANK: 'bloodbank'
 };
 
-const choice = UserType.BLOODBANK;
+const choice = UserType.DONOR;
 let content = null;
 
 if (choice === UserType.DONOR) {
@@ -199,17 +199,17 @@ content = (
  DATE OF BIRTH <i className="fas fa-calendar-alt icon-left2"></i><span className="innertext">hi</span>
 </li>
 </div>
-<div className="rightcolumn2">
+<div className="rightcolumn1">
 <li className="list">
  BLOOD TYPE<i className="fas fa-tint icon-left3"></i><span className="innertext">hi</span>
 </li>
 </div>
-<div className="middlecolumn1">
+<div className="finalcolumn2">
 <li className="list">
  TELEPHONE <i className="fas fa-phone icon-left4"></i> <span className="innertext">hi</span>
 </li>
 </div>
-<div className="middlecolumn2">
+<div className="finalcolumn1">
 <li className="list">
  ADDRESS <i className="fas fa-map-marker-alt icon-left5"></i><span className="innertext">hi</span>
 </li>
