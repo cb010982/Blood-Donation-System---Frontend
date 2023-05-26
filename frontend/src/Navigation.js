@@ -270,6 +270,7 @@ import "./Navigation.css";
 
 
 const UserTypes = {
+  HOME:'home',
   DONOR: "donor",
   ADMIN: "admin",
   HOSPITAL: "hospital",
@@ -279,6 +280,45 @@ const UserTypes = {
 function Navigation(props) {
 
   const renderNavigationLinks = () => {
+
+    if (props.user === UserTypes.HOME) {
+      return (
+      <>
+      <button>SIGN UP</button>
+      <ul >
+      <li >
+      <a href="/donorSignUpPage">DONOR</a>
+      </li>
+      <li >
+      <a href="/adminSignUpPage" >ADMIN</a>
+      </li>
+      <li >
+      <a href="/hospitalSignUpPage" >HOSPITAL</a>
+      </li>
+      <li >
+      <a href="/bloodBankSignUpPage">BLOOD BANK</a>
+      </li>
+      </ul>
+      <button>LOGIN IN</button>
+      <ul >
+      <li >
+      <a href="/donorLoginPage">DONOR</a>
+      </li>
+      <li >
+      <a href="/adminLoginPage" >ADMIN</a>
+      </li>
+      <li >
+      <a href="/hospitalLoginPage" >HOSPITAL</a>
+      </li>
+      <li >
+      <a href="/bloodBankLoginPage">BLOOD BANK</a>
+      </li>
+      </ul>
+      </>
+      );
+      }
+
+
     if (props.user === UserTypes.DONOR) {
       return (
         <ul className="sidebarnav">
