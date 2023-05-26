@@ -1,117 +1,104 @@
 
 .tablemain {
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    width:100%;
-    margin-top:10px;
-  }
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  width:100%;
+  margin-top:10px;
+}
 
-  select {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
+select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  }
-  
-  .tablecover{
-  background-color: white;
-  width:90%;
-  margin-left:5%;
-  height:auto;
-  padding:5%;
-  }
+.tablecover{
+background-color:whitesmoke;
+width:70%;
+margin-left:20%;
+height:auto;
+padding:5%;
+}
 
-  .tablename{
-    font-size:20px;
-    margin-left:40%;
-  }
+.tablename{
+  font-size:20px;
+  margin-left:30%;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  font-size:15px; 
+  border-bottom: 1px solid rgb(215, 215, 215);
+}
+
+.submitbutton{
+  color: rgb(255, 255, 255);
+  border-radius:22px;
+  border: 2px solid rgb(0, 0, 0);
+  padding:8px;
+  width:20%;
+  background-color: black;
+  margin-left:75%;
+  margin-top:2%;
+}
+
+.submitbutton:hover {
+  background-color: gray;
+  color: white;
+}
+
+th {
+  font-weight:lighter;
+  color:#9f9d9d;
+  background-color: whitesmoke;
+  font-size:14px;  
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: whitesmoke;
+  border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.search{
+  width:50%;
+  border: 1px solid #d3d3d3;
+  border-radius: 25px;
+  height:40px;
+  padding:12px;
+  margin: 20px;
+  margin-left: 60px;
+  background-color: #ffffff;
+}
+
+
+@media only screen and (max-width: 600px) {
 
   th, td {
-    padding: 15px;
-    text-align: left;
-    font-size:15px; 
+    font-size: 10px;
   }
-  
-  .submitbutton{
-    color: rgb(255, 255, 255);
-    border-radius:22px;
-    border: 2px solid rgb(0, 0, 0);
-    padding:8px;
-    width:20%;
-    background-color: black;
-    margin-left:75%;
-    margin-top:2%;
+ 
+  .App table {
+    font-size: 14px;
+    margin-left:-16%;
   }
+}
 
-  .submitbutton:hover {
-    background-color: gray;
-    color: white;
-  }
+@media only screen and (max-width: 320px) {
 
-  th {
-    font-weight:lighter;
-    color:#ffffff;
-    background-color: #000000;
-    font-size:12px;  
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f0f0f0;
-  }
-  
-  input[type="text"],input[type="number"]  {
-    border: 1px solid #b3adad;
-    padding: 10px;
-    width: 100%;
-  }
-  
-  input[type="text"]:focus {
-    outline: none;
-    border-color: #989ea3;
-  }
+table{
+  margin-left: 4px!important;
+  padding:0px;
+}
+th, td {
+  font-size: 8px;
+  padding:0px;
+}
 
-  .search{
-    margin-left:12px;
-    width:50%;
-    border-radius:25px;
-  }
-  
-  @media only screen and (max-width: 600px) {
-  
-    th, td, input[type="text"] {
-      font-size: 10px;
-    }
-   
-    .App table {
-      font-size: 14px;
-      margin-left:-16%;
-    }
-  }
-  
-  @media only screen and (max-width: 320px) {
-  
-  table{
-    margin-left: 4px!important;
-    padding:0px;
-  }
-  th, td, input[type="text"] {
-    font-size: 8px;
-    padding:0px;
-  }
-  
-  }
-  .search-icon {
-  
-  margin-left:110%;
-  margin-top:-15%;
-  
-  }
-  
-  .search{
-    width:50% !important;
-    margin-left:20%;
-    margin-top:2%;
-  }
+}
+
+
