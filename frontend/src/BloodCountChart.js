@@ -67,19 +67,15 @@ function BloodCountChart() {
         </BarChart>
         <p className="Bloodtypetext">Blood Type</p>
       </div>
-      <div className="key">
         <div>
           <div className="circle green"></div>
           <p className="infoone">High</p>
         </div>
         <div>
           <div className="circle red"></div>
-          <p className="infotwo">
-            Low
-          </p>
-        </div>
+          <p className="infotwo">Low</p>
       </div>
-      
+   
       <div className="IncrementDecrementButtons">
 
     <p className="bloodcount">Blood Count</p>
@@ -124,3 +120,4 @@ export default BloodCountChart;
   </div>
 ))}
 </div>*/
+
