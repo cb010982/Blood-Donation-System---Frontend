@@ -1,0 +1,270 @@
+.donorSignuphomeContainer, 
+.hospitalSignuphomeContainer,
+.bloodBankSignuphomeContainer
+{ 
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25%;
+    padding-right: 15%;
+    background-color:whitesmoke;
+   
+}
+
+.donorLoginhomeContainer,
+.adminLoginhomeContainer,
+.hospitalLoginhomeContainer,
+.bloodBankLoginhomeContainer,
+.adminSignuphomeContainer
+
+{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 40%;
+    padding-right: 30%;
+    background-color:whitesmoke;
+   
+}
+
+
+.formHeading{
+  color:rgb(100, 100, 100);
+  padding-top:15px;
+  padding-bottom:15px;
+  
+}
+
+.error{
+    color:red;
+    font-size: 15px;
+   
+    display: flex;
+    flex-wrap: wrap;
+    
+    background-color: rgb(255, 255, 255);
+}
+
+.radioButtonContainer{
+  display:flex;
+  gap: 50%;
+  margin-top:10px;
+}
+
+.radiolabel{
+  margin-left:15px;
+}
+.donorSignupsubmitbtn, 
+.hospitalSignupsubmitbtn,
+.bloodBankSignupsubmitbtn
+{
+  margin-left:36%;
+  width:200px;
+  padding:8px;
+  border-radius:100px;
+ 
+  margin-bottom:15px;
+  background-color: orange;
+  border:none;
+  font-size:17px;
+}
+.donorLoginsubmitbtn, 
+.hospitalLoginsubmitbtn,
+.bloodBankLoginsubmitbtn,
+.adminSignupsubmitbtn,
+.adminLoginsubmitbtn
+{
+  margin-left:20%;
+  width:200px;
+  padding:8px;
+  border-radius:100px;
+  margin-top:20px;
+  margin-bottom:20px;
+  background-color: orange;
+  border:none;
+  font-size:17px;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #6a6a6a;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style the radio button when selected */
+input[type="radio"]:checked {
+  background-color: #3abac8;
+  border-color: #5dc1ae;
+}
+
+/* Style the label associated with the radio button */
+ 
+  
+  .formSection {
+    /*height: 100vh;
+    margin: 10px;*/
+   
+    border-radius: 20px;
+    padding-left:25px;
+    padding-right:25px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color:rgb(255, 255, 255);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+   
+  }
+  
+  .formRowContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Push the fields to either side */
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .donorSignupformRow,
+  .adminSignupformRow,
+  .hospitalSignupformRow,
+  .bloodBankSignupformRow
+   {
+    flex-basis: calc(50% - 20px); /* Adjust the value based on desired spacing */
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+   
+  }
+
+  .donorLoginformRow,
+  .adminLoginformRow,
+  .hospitalLoginformRow,
+  .bloodBankLoginformRow,
+  .adminSignuphomeformRow{
+    flex-basis: 100%; /* Occupy the full width of the container */
+    padding: 10px;
+    box-sizing: border-box;
+    background-color:white;
+    margin: 1px;
+  }
+
+  .inputlabel{
+    color:rgb(81, 77, 77);
+    font-weight:480;
+  }
+
+  .formInputField{
+    width:310px;
+    background-color:white;
+    border-top:none;
+    border-left: none;
+    border-right:none;
+    border-bottom: solid grey 1.5px;
+    border: solid rgb(174, 174, 174) 1.5px;
+   border-radius:80px;
+    margin-top:5px;
+    padding-top:7px;
+    padding-bottom:8px;
+    padding-left:10px;
+    padding-right:10px;
+
+    
+   
+  }
+
+  @media (max-width: 768px) {
+    .donorSignupformRow,
+    .adminSignupformRow,
+    .hospitalSignupformRow,
+    .bloodBankSignupformRow,
+    .donorLoginformRow,
+    .adminLoginformRow,
+    .hospitalLoginformRow,
+    .bloodBankLoginformRow,
+    .adminSignuphomeformRow {
+      flex-basis: 100%; /* Occupy the full width of the container */
+    }
+
+    .donorSignuphomeContainer, 
+    .hospitalSignuphomeContainer,
+    .bloodBankSignuphomeContainer
+    
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+.donorLoginhomeContainer, 
+.hospitalLoginhomeContainer,
+.bloodBankLoginhomeContainer,
+.adminLoginhomeContainer,
+.adminSignuphomeContainer
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 18%;
+  padding-right: 18%;
+}
+
+
+
+
+.formInputField{
+  width:100%;
+  margin-top:10px;
+  margin-bottom:15px;
+  padding-top:8px;
+  padding-bottom:5px;
+  padding-left:10px;
+ 
+ 
+}
+
+.formSection{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.radioButtonContainer{
+  display:flex;
+  gap: 50%;
+  margin-top:15px;
+  margin-bottom:10px;
+}
+
+.donorSignupsubmitbtn, 
+.donorLoginsubmitbtn, 
+.hospitalSignupsubmitbtn,
+.hospitalLoginsubmitbtn,
+.bloodBankSignupsubmitbtn,
+.bloodBankLoginsubmitbtn,
+.adminSignupsubmitbtn,
+.adminLoginsubmitbtn
+{
+  margin-top:10px;
+  margin-left:0px;
+  width:400px;
+  
+}
+
+}
+
