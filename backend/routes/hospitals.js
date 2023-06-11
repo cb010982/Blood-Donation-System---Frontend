@@ -1,9 +1,10 @@
 const router = require("express").Router();
 let hospital = require("../models/hospital");
+let pendinghospital = require("../models/pendingHospitals");
 const bcrypt = require("bcrypt");
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr("ndo9X4Sr6IJRPoPTHh5ogo9vpMWrTI0h"); //secret key
-const { createSecretToken } = require("../util/SecretToken");
+const { createSecretToken } = require("../Util/SecretToken");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
@@ -12,17 +13,17 @@ router.route("/add").post(
     try {
       const username = req.body.username;
       const password = req.body.password;
-
+      const existingUser = await pendinghospital.findOne({ username });
+      const existingUser_2 = await hospital.findOne({ username });
+      if (existingUser || existingUser_2) {
+        return res.json({ message: "User already exists" });
+      }
       const name = cryptr.encrypt(req.body.name);
       const telephone = cryptr.encrypt(parseInt(req.body.telephone));
       const district = cryptr.encrypt(req.body.district);
       const address = cryptr.encrypt(req.body.address);
 
-      const existingUser = await hospital.findOne({ username });
-      if (existingUser) {
-        return res.json({ message: "User already exists" });
-      }
-      const user = await hospital.create({
+      const user = await pendinghospital.create({
         username,
         password,
         name,
@@ -99,11 +100,24 @@ router.route("/verify").post(
         return res.json({ status: false });
       } else {
         const Hospital = await hospital.findById(data.id);
-        if (Hospital)
-          return res.json({ status: true, user: Hospital.username });
-        else return res.json({ status: false });
+        if (Hospital) {
+          const name = cryptr.decrypt(Hospital.name);
+          const telephone = cryptr.decrypt(Hospital.telephone);
+          const district = cryptr.decrypt(Hospital.district);
+          const address = cryptr.decrypt(Hospital.address);
+          const user = {
+            username: Hospital.username,
+            name,
+            district,
+            telephone,
+            address,
+          };
+          return res.json({ status: true, user: user });
+        } else return res.json({ status: false });
       }
     });
   })
 );
+
+
 module.exports = router;

@@ -1,9 +1,10 @@
 const router = require("express").Router();
 let BloodBank = require("../models/bloodBank");
+let pendingbloodBank=require("../models/pendingBloodbanks");
 const bcrypt = require("bcrypt");
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr("ndo9X4Sr6IJRPoPTHh5ogo9vpMWrTI0h"); //secret key
-const { createSecretToken } = require("../util/SecretToken");
+const { createSecretToken } = require("../Util/SecretToken");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
@@ -18,11 +19,11 @@ router.route("/add").post(
       const district = cryptr.encrypt(req.body.district);
       const address = cryptr.encrypt(req.body.address);
 
-      const existingUser = await BloodBank.findOne({ username });
+      const existingUser = await pendingbloodBank.findOne({ username });
       if (existingUser) {
         return res.json({ message: "User already exists" });
       }
-      const user = await BloodBank.create({
+      const user = await pendingbloodBank.create({
         username,
         password,
         name,
@@ -87,8 +88,20 @@ router.route("/verify").post(
         return res.json({ status: false });
       } else {
         const bloodBank = await BloodBank.findById(data.id);
-        if (bloodBank) return res.json({ status: true, user: bloodBank.username });
-        else return res.json({ status: false });
+        if (bloodBank) {
+          const name = cryptr.decrypt(bloodBank.name);
+          const telephone = cryptr.decrypt(bloodBank.telephone);
+          const district = cryptr.decrypt(bloodBank.district);
+          const address = cryptr.decrypt(bloodBank.address);
+          const user = {
+            username: bloodBank.username,
+            name,
+            district,
+            telephone,
+            address,
+          };
+          return res.json({ status: true, user: user });
+        } else return res.json({ status: false });
       }
     });
   })

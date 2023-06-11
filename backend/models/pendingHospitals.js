@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-const hospitalSchema = new Schema({
+const bcrypt = require("bcrypt");
+const pendinghospitalSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -23,7 +23,9 @@ const hospitalSchema = new Schema({
     type: String,
   },
 });
-;
-const hospital = mongoose.model("hospital", hospitalSchema);
+pendinghospitalSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 12);
+});
+const pendinghospital = mongoose.model("pendinghospitals", pendinghospitalSchema);
 
-module.exports = hospital;
+module.exports = pendinghospital;

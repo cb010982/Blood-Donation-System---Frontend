@@ -3,10 +3,9 @@ const Donor = require("../models/donor");
 const bcrypt = require("bcrypt");
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr("ndo9X4Sr6IJRPoPTHh5ogo9vpMWrTI0h"); //secret key
-const { createSecretToken } = require("../util/SecretToken");
+const { createSecretToken } = require("../Util/SecretToken");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-
 
 router.route("/add").post(
   (Signup = async (req, res, next) => {
@@ -15,7 +14,7 @@ router.route("/add").post(
       const password = req.body.password;
 
       const name = cryptr.encrypt(req.body.name);
-      const telephone = cryptr.encrypt(parseInt(req.body.telephone)); //telephone type will be converted to string from here on
+      const telephone = cryptr.encrypt(parseInt(req.body.telephone));
       const bloodtype = cryptr.encrypt(req.body.bloodtype);
       const gender = cryptr.encrypt(req.body.gender);
       const dob = cryptr.encrypt(req.body.dob);
@@ -41,12 +40,10 @@ router.route("/add").post(
         withCredentials: true,
         httpOnly: false,
       });
-      res
-        .status(201)
-        .json({
-          message: "Donor signed up successfully",
-          success: true /* user*/,
-        });
+      res.status(201).json({
+        message: "Donor signed up successfully",
+        success: true /* user*/,
+      });
       next();
     } catch (error) {
       console.error(error);
@@ -85,7 +82,7 @@ router.route("/login").post(
 );
 
 router.route("/verify").post(
-  (donorVerification =  (req, res) => {
+  (donorVerification = (req, res) => {
     const token = req.cookies.token;
     if (!token) {
       return res.json({ status: false });
@@ -97,24 +94,40 @@ router.route("/verify").post(
         const donor = await Donor.findById(data.id);
         if (donor) {
           const name = cryptr.decrypt(donor.name);
-          return res.json({ status: true, user: name });
-        } else
-          return res.json({ status: false });
+          const telephone = cryptr.decrypt(donor.telephone);
+          const bloodtype = cryptr.decrypt(donor.bloodtype);
+          const dob = cryptr.decrypt(donor.dob);
+          const address = cryptr.decrypt(donor.address);
+          const user = {
+            name,
+            bloodtype,
+            telephone,
+            dob,
+            address,
+          };
+          return res.json({ status: true, user: user });
+        } else return res.json({ status: false });
       }
     });
   })
 );
 
-/*
-router.route("/").get((req, res) => {
+router.route("/").get(async (req, res) => {
   //get Donor info
-  Donor.find()
-    .then((donors) => {
-      res.json(donors);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const user = await Donor.find();
+  const Donors = [];
+  for (let i = 0; i < user.length; i++) {
+    const name = cryptr.decrypt(user[i].name);
+    const bloodtype = cryptr.decrypt(user[i].bloodtype);
+    const gender = cryptr.decrypt(user[i].gender);
+    const dob = cryptr.decrypt(user[i].dob);
+    const telephone = cryptr.decrypt(user[i].telephone);
+    const address = cryptr.decrypt(user[i].address);
+    Donors.push({ name, bloodtype, gender, dob, telephone, address });
+  }
+  res.json(Donors);
 });
-*/
+
+
+
 module.exports = router;
