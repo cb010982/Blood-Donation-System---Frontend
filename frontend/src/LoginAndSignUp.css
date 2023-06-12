@@ -1,270 +1,268 @@
-.donorSignuphomeContainer, 
-.hospitalSignuphomeContainer,
-.bloodBankSignuphomeContainer
-{ 
-    height:100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 25%;
-    padding-right: 15%;
-    background-color:whitesmoke;
-   
-}
-
-.donorLoginhomeContainer,
-.adminLoginhomeContainer,
-.hospitalLoginhomeContainer,
-.bloodBankLoginhomeContainer,
-.adminSignuphomeContainer
-
-{
-    height:100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 40%;
-    padding-right: 30%;
-    background-color:whitesmoke;
-   
-}
-
-
-.formHeading{
-  color:rgb(100, 100, 100);
-  padding-top:15px;
-  padding-bottom:15px;
-  
-}
-
-.error{
-    color:red;
-    font-size: 15px;
-   
-    display: flex;
-    flex-wrap: wrap;
-    
-    background-color: rgb(255, 255, 255);
-}
-
-.radioButtonContainer{
-  display:flex;
-  gap: 50%;
-  margin-top:10px;
-}
-
-.radiolabel{
-  margin-left:15px;
-}
-.donorSignupsubmitbtn, 
-.hospitalSignupsubmitbtn,
-.bloodBankSignupsubmitbtn
-{
-  margin-left:36%;
-  width:200px;
-  padding:8px;
-  border-radius:100px;
- 
-  margin-bottom:15px;
-  background-color: orange;
-  border:none;
-  font-size:17px;
-}
-.donorLoginsubmitbtn, 
-.hospitalLoginsubmitbtn,
-.bloodBankLoginsubmitbtn,
-.adminSignupsubmitbtn,
-.adminLoginsubmitbtn
-{
-  margin-left:20%;
-  width:200px;
-  padding:8px;
-  border-radius:100px;
-  margin-top:20px;
-  margin-bottom:20px;
-  background-color: orange;
-  border:none;
-  font-size:17px;
-}
-
-input[type="radio"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid #6a6a6a;
-  outline: none;
-  cursor: pointer;
-}
-
-/* Style the radio button when selected */
-input[type="radio"]:checked {
-  background-color: #3abac8;
-  border-color: #5dc1ae;
-}
-
-/* Style the label associated with the radio button */
- 
-  
-  .formSection {
-    /*height: 100vh;
-    margin: 10px;*/
-   
-    border-radius: 20px;
-    padding-left:25px;
-    padding-right:25px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    background-color:rgb(255, 255, 255);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-   
-  }
-  
-  .formRowContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Push the fields to either side */
-    background-color: rgb(255, 255, 255);
-  }
-  
-  .donorSignupformRow,
-  .adminSignupformRow,
-  .hospitalSignupformRow,
-  .bloodBankSignupformRow
-   {
-    flex-basis: calc(50% - 20px); /* Adjust the value based on desired spacing */
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: white;
-   
-  }
-
-  .donorLoginformRow,
-  .adminLoginformRow,
-  .hospitalLoginformRow,
-  .bloodBankLoginformRow,
-  .adminSignuphomeformRow{
-    flex-basis: 100%; /* Occupy the full width of the container */
-    padding: 10px;
-    box-sizing: border-box;
-    background-color:white;
-    margin: 1px;
-  }
-
-  .inputlabel{
-    color:rgb(81, 77, 77);
-    font-weight:480;
-  }
-
-  .formInputField{
-    width:310px;
-    background-color:white;
-    border-top:none;
-    border-left: none;
-    border-right:none;
-    border-bottom: solid grey 1.5px;
-    border: solid rgb(174, 174, 174) 1.5px;
-   border-radius:80px;
-    margin-top:5px;
-    padding-top:7px;
-    padding-bottom:8px;
-    padding-left:10px;
-    padding-right:10px;
-
-    
-   
-  }
-
-  @media (max-width: 768px) {
-    .donorSignupformRow,
-    .adminSignupformRow,
-    .hospitalSignupformRow,
-    .bloodBankSignupformRow,
-    .donorLoginformRow,
-    .adminLoginformRow,
-    .hospitalLoginformRow,
-    .bloodBankLoginformRow,
-    .adminSignuphomeformRow {
-      flex-basis: 100%; /* Occupy the full width of the container */
-    }
-
-    .donorSignuphomeContainer, 
-    .hospitalSignuphomeContainer,
-    .bloodBankSignuphomeContainer
-    
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:auto;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-
-.donorLoginhomeContainer, 
-.hospitalLoginhomeContainer,
-.bloodBankLoginhomeContainer,
-.adminLoginhomeContainer,
-.adminSignuphomeContainer
-{
+.loginAndSingupContainer{
   display: flex;
+  height:100vh;
   justify-content: center;
   align-items: center;
-  height:100vh;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 18%;
-  padding-right: 18%;
+  background-color: whitesmoke;
+  color:rgb(74, 74, 74)
 }
 
+.loginAndSignupSide{
+  background-color:whitesmoke;
+  width:18%;
+}
 
+.loginContainer{
+  flex:4;
+  background-color:rgb(255, 255, 255);
+  margin-left:25%;
+  margin-right:25%;
+  padding-top:1.5%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ }
 
+ .loginAndSingUpLine{
+  border:solid black 1px;
+ }
 
-.formInputField{
+.signupContainer{
+  flex:4;
+  margin-left:10%;
+  margin-right:10%;
+  background-color: white;
+  padding-top:1.5%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ 
+}
+.loginandsingupheading{
+  text-align: center;
+ }
+.signupForm{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top:2%;
+  background-color: white;
+}
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+ }
+
+.signupformRows{
+  flex-basis: calc(50% - 10px); 
+  margin-bottom: 10px; 
+}
+
+.loginformRows{
   width:100%;
-  margin-top:10px;
-  margin-bottom:15px;
-  padding-top:8px;
-  padding-bottom:5px;
-  padding-left:10px;
- 
- 
-}
-
-.formSection{
-  margin-top:20px;
-  margin-bottom:20px;
-}
-
-.radioButtonContainer{
-  display:flex;
-  gap: 50%;
-  margin-top:15px;
   margin-bottom:10px;
+  margin-top:10px;
+}
+.error{
+  color:rgb(254, 102, 55);
+  text-align: left;
+  font-size: 14px;
+  font-weight:500;
+}
+.errorContainer{
+  min-height:15px;
+  margin-left: 11%;
+  width:84%;
 }
 
-.donorSignupsubmitbtn, 
-.donorLoginsubmitbtn, 
-.hospitalSignupsubmitbtn,
-.hospitalLoginsubmitbtn,
-.bloodBankSignupsubmitbtn,
-.bloodBankLoginsubmitbtn,
-.adminSignupsubmitbtn,
-.adminLoginsubmitbtn
-{
-  margin-top:10px;
-  margin-left:0px;
-  width:400px;
+.genderContainer{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  margin-left:11%;
+  padding-top:2px;
+  padding-left:5px;
+  border:none;
+  border-bottom:solid grey 1.5px; 
+  width:80%;
+  padding-bottom:1.5%;
+  transition: background-color 0.3s ease-in-out; 
+}
+
+.genderLabel{
+  margin-right:8px;
+}
+
+.formInputBox{
+  width:80%;
+  padding-left:5px;
+  padding-right:10px;
+  margin-left:10%;
+  padding-top:6px;
+  padding-bottom:6px;
+  border:none;
+  border-bottom:solid grey 1.5px;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s ease-in-out; 
+}
+
+.formInputBox:hover{
+
+ background-color: rgba(148, 215, 249, 0.422);
+ border-radius: 2px;
+}
+.formInputBox:focus{
+  outline: none; 
+}
+.formLabel{
+  text-align: left;
+  margin-left: 11%;
+  font-weight: 400;
+  
+  
+}
+.signupBtn,.loginBtn{
+  background-color: rgb(71, 70, 70);
+  color:white;
+  font-weight:500;
+  padding:10px;
+  border:none;
+  border-radius:50px;
+}
+.signupBtn:hover,.loginBtn:hover{
+  background-color: rgb(162, 162, 162);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color:rgb(0, 0, 0);
+  
+}
+.signupBtn{
+  width:200px;
+  margin-top:1.5%;
+  margin-bottom:2%;
+}
+.loginBtn{
+  width:60%;
+  margin-top:4%;
+  margin-bottom:4%;
+  margin-left: 1%;
+ }
+
+
+
+
+ @media screen and (min-width: 400px) and (max-width: 700px) {
+  .loginAndSingupContainer{
+    width: 100%;
+    height:auto;
+    padding-top:5%;
+    padding-bottom:5%;
+    }
+
+    .signupContainer{
+      margin-left:3%;
+      margin-right:3%;
+    
+      padding-top:0%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    } 
+
+    .loginandsingupheading{
+      text-align: center;
+      padding-top:14px;
+      font-size:28px;
+     }
+  .loginAndSignupSide{
+   
+    width:0;
+  }
+  .signupformRows{
+    flex-basis: 100%;
+    margin-bottom: 20px; 
+  }
+
+}
+
+@media (max-width: 400px) {
+  .loginAndSingupContainer{
+    width: 100%;
+    height:auto;
+    padding-top:0%;
+    padding-bottom:5%;
+    margin:0;
+   }
+
+   .loginandsingupheading{
+    text-align: center;
+    padding-top:14px;
+    font-size:28px;
+   }
+
+   .signupContainer{
+     margin-left:0%;
+     margin-right:0%;
+     padding-top:0%;
+    } 
+  .loginAndSignupSide{
+    background-color:whitesmoke;
+    width:0;
+  }
+  .signupformRows{
+    flex-basis: calc(100% - 10px); 
+    margin-bottom: 20px; 
+  }
   
 }
 
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+   .loginandsingupheading{
+    text-align: center;
+    padding-top:14px;
+    font-size:28px;
+   }
+  
+  .loginAndSingupContainer{
+    width: 100%;
+    height:100vh;
+    padding-top:5%;
+    padding-bottom:5%;
+    margin:0;
+   }
+  .loginAndSignupSide{
+    background-color:whitesmoke;
+    width:0;
+  }
+  .signupformRows{
+    flex-basis: calc(50% ); 
+    margin-bottom: 20px; 
+  }
+  .signupContainer{
+    margin-left:3%;
+    margin-right:3%;
+    padding-top:0%;
+   } 
+  
 }
+
+
+ /* @media (max-width: 1000px) {
+    .loginAndSingupContainer{
+      width: 100%;
+      height:100vh;
+      padding-top:5%;
+      padding-bottom:5%;
+      margin:0;
+     }
+    .loginAndSignupSide{
+      background-color:whitesmoke;
+      width:0;
+    }
+    .signupformRows{
+      flex-basis: calc(50% - 10px); 
+      margin-bottom: 20px; 
+    }
+    
+  
+  
+}*/
+
 
