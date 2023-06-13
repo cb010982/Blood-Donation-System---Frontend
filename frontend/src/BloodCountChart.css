@@ -1,183 +1,252 @@
 
-
-  /*.borderbox{
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    border-radius: 25px;
-    width:90%;
-    margin-left:5%;
-    height:auto;
-    padding:5%;
-    border:3px solid #000000;
-    background-color: whitesmoke;
-  }*/
-  .circle {  
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;   
-  }
+.circle {  
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;   
+}
 
 
-  .green {
-    background-color: green;
-    margin-left:35%;
-    margin-top:-2%;
-  
-  }
-  
-  .red {
-    background-color: red;
-    margin-left:43%;
-    margin-top:-2.5%;
-    
-  }
+.green {
+  background-color: green;
+  margin-left:35%;
+  margin-top:-2%;
 
-  .Barchart {
-    float: left;
-  }
-  
-  .blood-counts {
-    float: left;
-    margin-left: 20px;
-  }
-  
-  .bloodcount {
-    margin-bottom: 10px;
-    color:grey;
-  }
-  
-  .bloodtype {
-    margin-right: 5px;  
-  }
-  
-  .bloodlabels {
-    border-radius:5px;
-    border: 1.5px solid rgb(213, 213, 213);
-    padding: 2px;
-    height: 30px;
-    color: grey;
-  }
-  
-  .infotwo{
-    margin-left: 580px;
-    color: gray;
-    margin-top: -1.4%;
-    font-size: smaller;
-  }
+}
 
-  .infoone{
-    margin-left:37%;
-    margin-top:-1.4%;
-    color:gray;
-    font-size: smaller;
-  }
-  .Barchart{
-    margin-left:15%;
-    margin-top:-1%;
-  }
+.red {
+  background-color: red;
+  margin-left:43%;
+  margin-top:-2.5%; 
+}
+
+.Barchart {
+  float: left;
+  margin-left:15%;
+  margin-top:-1%;
+}
+
+
+.bloodcount {
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  color:grey;
+}
+
+
+
+.bloodlabels {
+  border-radius:5px;
+  border: 1.5px solid rgb(213, 213, 213);
+  padding: 2px;
+  height: 30px;
+  color: grey;
+}
+
+.infotwo{
+  margin-left: 580px;
+  color: gray;
+  margin-top: -1.4%;
+  font-size: smaller;
+}
+
+.infoone{
+  margin-left:37%;
+  margin-top:-1.4%;
+  color:gray;
+  font-size: smaller;
+}
+
 
 .bar{
-  width:20%;
+width:20%;
 }
- 
 
-  .IncrementDecrementButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top:-8%;
-    margin-bottom:5%;
-    background-color:whitesmoke;
-  }
-  
 
-  .IncrementDecrementButtons > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 48%;
-    border-radius:5px;
-   
+.IncrementDecrementButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top:-5%;
+  margin-bottom:5%;
+  background-color:whitesmoke;
+}
 
-  }
 
-  .btn1{
-    margin-top:2%;
-    margin-left:80%;
-    margin-bottom:0.5%;
-  }
-  .btn2{
-    margin-left:80%;
-    width:12.6%;
-  }
-  h3{
-    margin-top:-5px;
-    margin-bottom:4%;
-  }
-.bloodcount{
+.IncrementDecrementButtons > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 48%;
+  border-radius:5px;
+}
+
+.btn1{
   margin-top:2%;
-  margin-bottom:1%;
-
-
+  margin-left:80%;
+  margin-bottom:0.5%;
 }
+.btn2{
+  margin-left:80%;
+  width:12.6%;
+}
+h3{
+  margin-top:-5px;
+  margin-bottom:4%;
+}
+
+.bloodcount{
+margin-top:2%;
+margin-bottom:1%;
+}
+
 .Bloodtypetext{
-  color:grey;
-  margin-top:-1%;
-  font-size: smaller;
-  margin-left:87%;
+color:grey;
+margin-top:-1%;
+font-size: smaller;
+margin-left:87%;
 }
 .frequencytext{
-  color:grey;
-  font-size: smaller;
-  margin-left:18%;
-  margin-top:7%;
-  width:10%;
+color:grey;
+font-size: smaller;
+margin-left:18%;
+margin-top:7%;
+width:10%;
 }
 
 
-.submit {
-  color: rgb(255, 255, 255);
-  border-radius:22px;
-  border: 2px solid rgb(0, 0, 0);
-  padding:8px;
-  background-color: black;
-  font-size:15px;
-  margin-left: 60%;
- margin-top:3%;
+.submit,.edit {
+color: rgb(255, 255, 255);
+border-radius:5px;
+border: 2px solid rgb(0, 0, 0);
+padding:8px;
+background-color: black;
+font-size:15px;
+margin-left: 60%;
+margin-top:3%;
 
 }
-.submit:hover {
-  background-color: gray;
-  color: white;
+.submit:hover,.setcustomlevel:hover,.edit:hover {
+background-color: gray;
+color: white;
 }
 .heading{  
-  margin-top:0.5%;
+margin-top:0.5%;
 }
 .bloodtypes{
-  margin-right:5%;
-  color:grey;
+margin-right:5%;
+color:grey;
 }
+
+.thresholdclass {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.label {
+margin-bottom: 10px;
+margin-top:20px;
+color:rgb(82, 81, 81);
+}
+
+.thresholdinputfield {
+margin-right: 10px;
+border: 1px solid rgb(0, 0, 0);
+border-radius:5px;
+}
+
+.setcustomlevel{
+border: 2px solid rgb(0, 0, 0);
+background-color: black;
+color: rgb(255, 255, 255);
+font-size:13px;
+padding-left:7px;
+padding-top:2px;
+padding-bottom:2px;
+padding-right:8px;
+border-radius:5px;
+}
+
+
+.inputcontainer {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.numberborder {
+display: flex;
+align-items: center;
+}
+
+.input-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: 10px; /* Add margin to separate the input from the label */
+}
+
 @media only screen and (max-width: 426px) {
-  .borderbox{
-   width:890px;
-  }
-  .Barchart{
-    margin-left:-2%;
-  }
-  .key{
-    margin-left:82%;
-    margin-top:-65%;
-  }
+.bloodcount{
+  margin-left:-2%;
+  margin-bottom:5%;
+}
+.Barchart{
+  margin-left:-18%;
+  margin-top: 2%;
+}
+.key{
+  margin-left:82%;
+  margin-top:-65%;
+}
+.bloodlabels{
+margin-left:-100%;
+height: 30px;
+width:150px;
+}
+.IncrementDecrementButtons > div {
+  align-items: center;
+  justify-content: space-between;
+  width: 48%;
+  border-radius: 5px;
+}
 
-  .IncrementDecrementButtons {
-
-    margin-top:50%;
+.IncrementDecrementButtons {
     margin-bottom:5%;
-  }
+}
 
-  .bloodtypes{
-    margin-right:9%;
-  }
+.bloodtypes{
+  margin-left:-20%;
+}
+.frequencytext{
+width:100%;
+margin-top:30%;
+margin-left:2%;
+}
+.submit {
+font-size:13px;
+margin-left: -6%;
+}
+
+.infotwo{
+margin-left: 100px;
+margin-top: -1.4%;
+}
+
+.infoone{
+margin-left:37%;
+margin-top:-29px;
+}
+.red {
+margin-left:73%;
+margin-top:-147.5%; 
+}
+.green {
+margin-left:33%;
+margin-top:2%; 
+}
+
 
 }
