@@ -7,17 +7,22 @@ const DropDown = {
 };
 
 function Dropdown(props) {
+  const { value, onChange } = props;
+  const [selectedOption, setSelectedOption] = useState(value);
 
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    setSelectedOption(value);
+    onChange(event);
+  };
 
-    const [selectedOption, setSelectedOption] = useState('');
-
-    const handleSelectChange = (event) => {
-      setSelectedOption(event.target.value);
-    };
     if (props.dropdown === DropDown.DISTRICTDROPDOWN) {
       return (
         <div>
-          <select value={selectedOption} onChange={handleSelectChange} className="districtdrop" >
+          <select value={selectedOption} onChange={handleSelectChange} className='dropdown' >
+          <option hidden value="" className="default">
+           Select a district
+          </option> 
           <option value="1">Ampara</option>
           <option value="2">Anuradhapura</option>
           <option value="3">Badulla</option>
@@ -52,7 +57,10 @@ function Dropdown(props) {
 
       return (
         <div>
-        <select value={selectedOption} onChange={handleSelectChange} className="bloodtypedrop" >
+        <select value={selectedOption} onChange={handleSelectChange} className='dropdown'>
+        <option hidden value="" className="default">
+           Select a blood type
+        </option>   
         <option value="A+">A+</option>
         <option value="A-">A-</option>
         <option value="B+">B+</option>

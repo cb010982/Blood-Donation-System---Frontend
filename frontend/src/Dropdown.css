@@ -1,34 +1,13 @@
-*{
-  font-family:'Times New Roman', Times, serif;
-}
 
-.dropdownbutton {
-    padding: 8px;
-    font-size: 16px;
-    border-radius:5px;
-    background-color: #19bd66;
-    color: white;
-    border:none;
-    cursor: pointer;
+.dropdown{
+  border:none;
+  background-color: transparent;
+  outline: none;
+  width:100%;
   }
   
-
-  .dropdowninfo {
-    min-width: 150px;
-    z-index: 1;
-    display: none;
-    position: absolute;
-    display: block;
-
-  }
-
-  .dropdowninfo a {
-    color: black;
+  .dropdown:hover{
+  cursor: pointer;
   }
   
-  .dropdowninfo a:hover {
-    background-color: #ddd;
-  }
-  .dropdown, .dropdowninfo a {
-    cursor: pointer;
-  }
+  
