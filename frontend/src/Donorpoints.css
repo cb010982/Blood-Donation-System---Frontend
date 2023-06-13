@@ -1,62 +1,111 @@
 
 .box{
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 0 10px rgba(43, 43, 43, 0.7);
-    width:50%;
-    height: 300px;
-    color:black;
-    font-family:Arial;
-    border: 3px solid rgb(0, 0, 0);
-    border-radius:5px;
-    margin-left:25%;
-    margin-top:5%;
-  }
 
-  .space{
-    margin-top:5%;
-  }
+  box-shadow: 0 0 10px rgba(197, 194, 194, 0.7);
+  width:40%;
+  height: 320px;
+  font-family:Arial;
+  border-radius:5px;
+  background-color: white;
+  margin-left:33%;
+  margin-top:-10%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position:relative;
+   flex-direction: column;
+align-items: center; /* Add this line to horizontally center the content */
+justify-content: center;
+}
 
-  .heading{
-    font-size:large;
-    margin-left:40%;
-    font-family:Arial;
-    color:black;
-    text-decoration: none;
-    font-weight:lighter;
+.border{
+background-image: linear-gradient(to bottom, #ff9900, #ffcc00);
+width:100%;
+border-radius: 0px 0px 350px 350px;
+margin-top:-50px;
+height: 300px;
+margin-bottom: 10px;
+padding-bottom:150px;
+
+}
+
+.space{
+  margin-top:5%;
+}
+
+
+.paragraph{
+ margin-left:27%;
+ color:rgb(0, 0, 0);
+margin-top:16%;
+font-weight: bold;
+font-size: large;
+
+}
+
+
+
+.reward{
+margin-left:38%;
+width:30%;
+height:30%;
+position:relative;
+z-index:1;
+animation: moveImage 1.5s ease;
+
+}
+
+@keyframes moveImage {
+0% {
+  transform: translateY(-200px);
+}
+30% {
+  transform: translateY(0);
+}
+60% {
+  transform: translateY(-6px);
+}
+100% {
+  transform: translateY(0);
+}
+}
+
+.numberpoint{
+color:rgb(255, 231, 11);
+font-size:100px;
+font-weight: bold;
+margin-top:-35%;
+
+
+}
+
+
+@media only screen and (max-width: 672px) {
+  .numberpoint{
+    margin-top:-70%;
+    margin-left:30%;
+  }
+  .border{
+    margin-top: -9%;
+    
+  }
+  .mainbox{
+    margin-top:30%;
   }
   .paragraph{
-   margin-left:33%;
-  margin-top:-4%;
+    margin-left:25%;
+    margin-top:25%;
+    width:60%;
   }
-
-  .minibox{
-    margin-left:43%;
-    margin-top:5%;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(0, 0, 0);
-    border-radius:25px;
-    height:40px;
-    width: 90px;
-    padding:7px;
+  .box{
+    border-radius: 0px 0px 500px 500px;
+    height:300px;
+    margin-top:-15%;
+   margin-left:40%;
   }
-
-.hrtag{
-  border: 1px solid rgb(0, 0, 0);
+  .reward{
+    height:250px;
+    width:250px;
+    margin-left:40%;
+  }
 }
-
-  @media only screen and (max-width: 426px) {
-    .paragraph{
-        margin-left:10%;
-       margin-top:-4%;
-       font-size:12px;
-       }
-       .minibox{
-        margin-left:30%;
-        font-size:12px;
-        width:80px;
-        margin-top:2%;
-        padding:8px;
-      }
-}
-  

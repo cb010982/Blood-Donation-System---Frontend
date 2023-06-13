@@ -1,18 +1,20 @@
 import React from "react";
 import Navigation from "./Navigation";
 import './Donorpoints.css';
+import rewardpic from './images/rewardimage2.png';
+import { UserTypes } from "./utils/Enums";
 
-export default function Donorpoints(props) {
+
+export default function Donorpoints() {
      return (
-       <div>
-         <Navigation user="donor"/>
+       <div class="mainbox">
+         <Navigation user={UserTypes.DONOR}/>
+         <img src={rewardpic} className='reward' />
          <div className="box">
           <br/>
-          <p className="space"></p>
-         <h1 className="heading">DONOR POINTS</h1>
-         <hr className="hrtag"></hr>
-         <p className="paragraph">DONOR POINTS EARNED ARE:</p>
-         <p className="minibox">{props.points} pints</p>
+          <div className="border">
+         <p className="paragraph">DONOR POINTS EARNED ARE</p>
+         </div>  <p className="numberpoint">60</p>
          </div>
        </div>
      );
