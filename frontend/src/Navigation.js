@@ -1,245 +1,170 @@
-/*import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navigation.css";
-
-
-function Navigation(props) {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
-
-  const toggleSideBar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-    setIsButtonClicked(!isButtonClicked);
-  };
-
-  return (
-    <div>
-      <button
-        className={`sidebar-toggle ${isButtonClicked ? "active" : ""}`}
-        onClick={toggleSideBar}
-      >
-        <i className={`fas ${isButtonClicked ? "fa-times" : "fa-bars"}`}></i>
-      </button>
-      <div className={`sidebar ${isSideBarOpen ? "active" : ""}`}>
-        {props.user === "donor" && (
-          <ul className="sidebarnav">
-            <h2 className="myac"> MY ACCOUNT </h2>
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/Dashboards" className="link">DONOR DASHBOARD </a>
-            </li>
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/Donorhistory" className="link">DONATION HISTORY </a>
-            </li>
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/Donorpoints" className="link">VIEW DONOR POINTS</a>
-            </li >
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/FAQS" className="link">FAQS</a>
-            </li>
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/Location1" className="link">FIND NEAREST LOCATION</a>
-            </li>
-            <hr className="navhr"/>
-            <li className="lists">
-              <a href="/SignUp" className="link">LOGOUT</a>
-            </li>
-            <hr className="navhr"/>
-          </ul>
-        )}
-
-        {props.user === "admin" && (
-          <ul className="sidebarnav">
-            <li className="lists">
-            <a href="/Dashboards" className="link">ADMIN DASHBOARD</a>
-            </li>
-            <li className="lists">
-            <a href="/Pendingrequests" className="link">PENDING REQUESTS</a>
-            <li className="subnav">HOSPITAL</li>
-            <li className="subnav">BLOOD BANK</li>
-            </li >
-            <li className="lists">
-            <a href="/Acceptedrequests" className="link">ACCEPTED REQUESTS</a>
-            <li className="subnav">HOSPITAL</li>
-            <li className="subnav">BLOOD BANK</li>
-            </li>
-            <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-            </li>
-          </ul>
-        )}
-
-        {props.user === "hospital" && (
-          <ul className="sidebarnav">
-            <li className="lists">
-            <a href="/Dashboards" className="link">HOSPITAL DASHBOARD</a>
-            </li>
-            <li className="lists">
-            <a href="/HospitalChart" className="link">BLOOD COUNT</a>
-            </li>
-            <li className="lists">
-            <a href="/BloodBankSearch" className="link">BLOOD BANK SEARCH</a>
-            </li>
-            <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-            </li>
-          </ul>
-        )}
-
-        {props.user === "bloodbank" && (
-          <ul className="sidebarnav">
-            <li className="lists">
-              <a href="/Dashboards" className="link">DASHBOARD</a>
-            </li>
-            <li className="lists">
-              <a href="/BloodBankChart" className="link">BLOOD CHART</a>
-            </li>
-            <li className="lists">
-              <a href="/Donorsearch" className="link">DONOR BASE</a>
-            </li>
-            <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-            </li>
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-}
-
-*//*
 import profilepic from "./images/common.png";
-import React, { useState } from "react";
-import "./Navigation.css";
+import '@fortawesome/fontawesome-free/css/all.css';
+import { UserTypes } from "./utils/Enums";
+//import { useCookies } from "react-cookie";
+//import { useHistory } from "react-router-dom";
 
-
-const UserTypes = {
-  DONOR: "donor",
-  ADMIN: "admin",
-  HOSPITAL: "hospital",
-  BLOODBANK: "bloodbank",
+const navigationLinks = {
+  [UserTypes.ABOUT]: {
+    iconClass: "homeIcon",
+    links: [
+      {label:  "About",href:"/about",icon:"fa fa-home"},
+      {label: "SIGN UP"},
+          { label: "DONOR", href: "/donorSignUpPage", icon: "fas fa-tint" },
+          { label: "ADMIN", href: "/adminSignUpPage", icon: "fas fa-user-cog" },
+          { label: "HOSPITAL", href: "/hospitalSignUpPage", icon: "fas fa-hospital" },
+          { label: "BLOOD BANK", href: "/bloodBankSignUpPage", icon: "fas fa-flask" },
+      { label: "LOG IN"},
+          { label: "DONOR", href: "/donorLoginPage", icon: "fas fa-tint" },
+          { label: "ADMIN", href: "/adminLoginPage", icon: "fas fa-user-cog" },
+          { label: "HOSPITAL", href: "/hospitalLoginPage", icon: "fas fa-hospital" },
+          { label: "BLOOD BANK", href: "/bloodBankLoginPage", icon: "fas fa-flask" },  
+    ],
+  },
+  [UserTypes.DONOR]: {
+    iconClass: "donorIcon",
+    links: [
+      {label:  "About",href:"/aboutDonor",icon:"fa fa-home"},
+      { label: "Donor Dashboard", href: "/donorDashboard", icon: "fas fa-info-circle" },
+      { label: "Donation History", href: "/donorHistory", icon: "fas fa-history" },
+      { label: "View Donor Points", href: "/donorPoints", icon: "fas fa-coins" },
+      { label: "FAQs", href: "/FAQs", icon: "fas fa-question" },
+      { label: "Find Nearest Location", href: "/donorlocation", icon: "fas fa-map-marker-alt" },
+      { label: "Logout", href: "/home", icon: "fas fa-sign-out-alt" },
+    ],
+  },
+  [UserTypes.ADMIN]: {
+    iconClass: "adminIcon",
+    links: [
+      {label:  "About",href:"/aboutAdmin",icon:"fa fa-home"},
+      { label: "Admin Dashboard", href: "/adminDashboard", icon: "fas fa-info-circle" },
+      { label: "Pending Requests"}, 
+        { label: "Hospital", href: "/hospitalPending", icon: "fas fa-hospital" },
+        { label: "Blood Bank", href: "/bloodBankPending", icon: "fas fa-flask" },
+      { label: "Accepted Requests"}, 
+        { label: "Hospital", href: "/hospitalAccepted", icon: "fas fa-hospital" },
+        { label: "Blood Bank", href: "/bloodBankAccepted", icon: "fas fa-flask" },
+      { label: "Logout", href: "/home", icon: "fas fa-sign-out-alt" },
+    ],
+  },
+  [UserTypes.BLOODBANK]: {
+    iconClass: "bloodBankIcon",
+    links: [
+      {label:  "About",href:"/aboutBloodBank",icon:"fa fa-home"},
+      { label: "Blood Bank Dashboard", href: "/bloodBankDashboard", icon: "fas fa-info-circle" },
+      { label: "Blood Stocks", href: "/bloodBankChart", icon: "fas fa-chart-bar" },
+      { label: "Donor Base", href: "/donorSearch", icon: "fas fa-users" },
+      { label: "Logout", href: "/home", icon: "fas fa-sign-out-alt" },
+    ],
+  },
+  [UserTypes.HOSPITAL]: {
+    iconClass: "hospitalIcon",
+    links: [
+      {label:  "About",href:"/aboutHospital",icon:"fa fa-home"},
+      { label: "Hospital Dashboard", href: "/hospitalDashboard", icon: "fas fa-info-circle" },
+      { label: "Blood Stocks", href: "/hospitalChart", icon: "fas fa-chart-bar" },
+      { label: "Blood Bank Search", href: "/bloodBankSearch", icon: "fa fa-search" },
+      { label: "Logout", href: "/home", icon: "fas fa-sign-out-alt" },
+    ],
+  },
 };
 
 function Navigation(props) {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const [isButtonClicked, setIsButtonClicked] = useState(true);
+  //const [cookies, removeCookie] = useCookies([]);
+  //const history = useHistory();
 
   const toggleSideBar = () => {
     setIsSideBarOpen(!isSideBarOpen);
     setIsButtonClicked(!isButtonClicked);
   };
 
+  const closeSideBar = () => {
+    setIsSideBarOpen(false);
+    setIsButtonClicked(false);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 840) {
+        closeSideBar();
+      } else {
+        setIsSideBarOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  function handleDashboard(userType, event) {
+   /* event.preventDefault(); 
+    removeCookie("token");
+    history.push("/home")*/
+  }
+
+
   const renderNavigationLinks = () => {
-    if (props.user === UserTypes.DONOR) {
+    const userType = props.user;
+
+    if (navigationLinks.hasOwnProperty(userType)) {
+      const {links } = navigationLinks[userType];
+
       return (
         <ul className="sidebarnav">
-          <h2 className="myac"> MY ACCOUNT </h2>
-          <img src={profilepic} className='donorIcon' />
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Dashboards" 
-             DONOR DASHBOARD className="link">
-              <i className="fas fa-chart-bar"></i> 
-              Donor Dashboard 
-            </a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Donorhistory" className="link">
-            <i className="fas fa-history"></i>Donation History </a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Donorpoints" className="link">
-            <i className="fas fa-coins"></i>
-              View Donor Points</a>
-          </li >
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/FAQS" className="link">
-            <i className="fas fa-question"></i>
-              FAQS</a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Location1" className="link">
-            <i className="fas fa-map-marker-alt"></i> 
-              Find Nearest Location</a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/SignUp" className="link">
-            <i className="fas fa-sign-out-alt"></i>
-              Logout</a>
-          </li>
-          <hr className="navhr"/>
+          {userType !== UserTypes.ABOUT && (
+            <>
+              <h2 className="myac"> MY ACCOUNT </h2>
+              <img src={profilepic} className={navigationLinks[userType].iconClass} />
+            </>
+          )}
+
+          {links.map((link, index) => (
+                        <React.Fragment key={index}>
+                        {link.label === "Logout" ? (
+                           <li className="lists">
+                           <a href="#" className="link" onClick={(event) => handleDashboard(userType, event)}>
+                             {link.icon && <i className={link.icon}></i>}
+                             {link.label}
+                           </a>
+                         </li>
+                        ) : (
+                         <li className="lists">
+                         <a href={link.href} className="link">
+                            {link.icon && <i className={link.icon}></i>}
+                            {link.label}
+
+                         </a>
+                      </li>
+                        )}       
+              {link.subLinks && (
+                <>
+                <ul>
+                  {link.subLinks.map((subLink, subIndex) => (
+                    <li className="sublists" key={subIndex}>
+                        <a href={subLink.href} className="link">
+                        {subLink.icon && <i className={subLink.icon}></i>}
+                       {subLink.label}
+                    </a>
+                 </li>
+                  ))}
+                </ul>
+               
+                </>
+              )}
+              <hr className="navhr" />
+            </React.Fragment>
+          ))}
         </ul>
       );
     }
 
-    if (props.user === UserTypes.ADMIN) {
-      return (
-        <ul className="sidebarnav">
-          <li className="lists">
-            <a href="/Dashboards" className="link">ADMIN DASHBOARD</a>
-          </li>
-          <li className="lists">
-            <a href="/Pendingrequests" className="link">PENDING REQUESTS</a>
-            <li className="subnav">HOSPITAL</li>
-            <li className="subnav">BLOOD BANK</li>
-          </li >
-          <li className="lists">
-            <a href="/Acceptedrequests" className="link">ACCEPTED REQUESTS</a>
-            <li className="subnav">HOSPITAL</li>
-            <li className="subnav">BLOOD BANK</li>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-          </li>
-        </ul>
-      );
-    }
-
-    if (props.user === UserTypes.HOSPITAL) {
-      return (
-        <ul className="sidebarnav">
-          <li className="lists">
-            <a href="/Dashboards" className="link">HOSPITAL DASHBOARD</a>
-          </li>
-          <li className="lists">
-            <a href="/HospitalChart" className="link">BLOOD COUNT</a>
-          </li>
-          <li className="lists">
-            <a href="/BloodBankSearch" className="link">BLOOD BANK SEARCH</a>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-          </li>
-        </ul>
-      );
-    }
-
-    if (props.user === UserTypes.BLOODBANK) {
-      return (
-        <ul className="sidebarnav">
-          <li className="lists">
-            <a href="/Dashboards" className="link">DASHBOARD</a>
-          </li>
-          <li className="lists">
-            <a href="/BloodBankChart" className="link">BLOOD CHART</a>
-          </li>
-          <li className="lists">
-            <a href="/Donorsearch" className="link">DONOR BASE</a>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link">LOGOUT</a>
-          </li>
-        </ul>
-      );
-    }
+    return null;
   };
 
   return (
@@ -254,178 +179,6 @@ function Navigation(props) {
         {renderNavigationLinks()}
       </div>
     </div>
-  );
-}
-
-export default Navigation;
-
-*/
-
-
-
-import profilepic from "./images/common.png";
-
-import React, { useState } from "react";
-import "./Navigation.css";
-
-
-const UserTypes = {
-  DONOR: "donor",
-  ADMIN: "admin",
-  HOSPITAL: "hospital",
-  BLOODBANK: "bloodbank",
-};
-
-function Navigation(props) {
-
-  const renderNavigationLinks = () => {
-    if (props.user === UserTypes.DONOR) {
-      return (
-        <ul className="sidebarnav">
-          <h2 className="myac"> MY ACCOUNT </h2>
-          <img src={profilepic} className='donorIcon' />
-
-          <li className="lists">
-            <a href="/Dashboards" 
-             DONOR DASHBOARD className="link">
-              <i className="fas fa-info-circle"></i> 
-              Donor Dashboard 
-            </a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Donorhistory" className="link">
-            <i className="fas fa-history"></i>Donation History </a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Donorpoints" className="link">
-            <i className="fas fa-coins"></i>
-              View Donor Points</a>
-          </li >
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/FAQS" className="link">
-            <i className="fas fa-question"></i>
-              FAQS</a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/Location1" className="link">
-            <i className="fas fa-map-marker-alt"></i> 
-              Find Nearest Location</a>
-          </li>
-          <hr className="navhr"/>
-          <li className="lists">
-            <a href="/SignUp" className="link">
-            <i className="fas fa-sign-out-alt"></i>
-              Logout</a>
-          </li>
-          <hr className="navhr"/>
-        </ul>
-      );
-    }
-
-    if (props.user === UserTypes.ADMIN) {
-      return (
-        <ul className="sidebarnav">
-          <h2 className="myac"> MY ACCOUNT </h2>
-          <img src={profilepic} className='adminIcon' />
-          <li className="lists">
-            <a href="/Dashboards" className="link">
-            <i className="fas fa-info-circle"></i> 
-              ADMIN DASHBOARD
-            </a>
-          </li>
-          <li className="lists">
-            <a href="/Pendingrequests" className="sidelink">
-            <i className="fas fa-clock"></i> 
-              PENDING REQUESTS
-            </a>
-            <ul>
-              <li className="link">
-              <i className="fas fa-hospital"></i>
-                HOSPITAL
-              </li>
-              <li className="link">
-              <i className="fas fa-medkit"></i>
-                BLOOD BANK
-              </li>
-            </ul>
-          </li>
-          <li className="lists">
-            <a href="/Acceptedrequests" className="link">
-            <i className="fas fa-check-circle"></i> 
-              ACCEPTED REQUESTS
-            </a>
-            <ul>
-              <li className="link">
-              <i className="fas fa-hospital"></i>
-                HOSPITAL
-              </li>
-              <li className="link">
-              <i className="fas fa-medkit"></i>
-                BLOOD BANK
-              </li>
-            </ul>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link">
-            <i className="fas fa-sign-out-alt"></i>
-              LOGOUT
-            </a>
-          </li>
-        </ul>
-      );
-    }
-
-    if (props.user === UserTypes.HOSPITAL) {
-      return (
-        <ul className="sidebarnav">
-          <h2 className="myac"> MY ACCOUNT </h2>
-          <img src={profilepic} className='hospitalIcon' />
-          <li className="lists">
-            <a href="/Dashboards" className="link"><i className="fas fa-info-circle"></i> HOSPITAL DASHBOARD</a>
-          </li>
-          <li className="lists">
-            <a href="/HospitalChart" className="link"><i className="fas fa-chart-bar"></i>BLOOD COUNT</a>
-          </li>
-          <li className="lists">
-            <a href="/BloodBankSearch" className="link"><i className="fa fa-search"></i>BLOOD BANK SEARCH</a>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link"><i className="fas fa-sign-out-alt"></i>LOGOUT</a>
-          </li>
-        </ul>
-      );
-    }
-
-    if (props.user === UserTypes.BLOODBANK) {
-      return (
-        <ul className="sidebarnav">
-          <h2 className="myac"> MY ACCOUNT </h2>
-          <img src={profilepic} className='bloodBankIcon' />
-          <li className="lists">
-            <a href="/Dashboards" className="link"><i className="fas fa-info-circle"></i>DASHBOARD</a>
-          </li>
-          <li className="lists">
-            <a href="/BloodBankChart" className="link"><i className="fas fa-chart-bar"></i>BLOOD CHART</a>
-          </li>
-          <li className="lists">
-            <a href="/Donorsearch" className="link"> <i className="fas fa-users"></i> DONOR BASE</a>
-          </li>
-          <li className="lists">
-            <a href="/SignUp" className="link"><i className="fas fa-sign-out-alt"></i>LOGOUT</a>
-          </li>
-        </ul>
-      );
-    }
-  };
-
-  return (
-    <div className="sidebar active">
-    {renderNavigationLinks()}
-  </div>
   );
 }
 
