@@ -1,181 +1,103 @@
-/*
-import React from 'react';
-import './Table.css';
-
-function Table({ tableName, numRows }) {
-  const tables = {
-    "DONOR HISTORY": {
-      columns: ["NIC", "DATE OF DONATION", "BLOOD TYPE", "QUANTITY OF BLOOD DONATED IN PINTS"],
-    },
-    "DONOR SEARCH": {
-      columns: ["NIC OF DONOR","NAME OF DONOR", "TELEPHONE DETAILS", "ENTER BLOOD TYPE", "ENTER LOCATION OF BLOOD BANK", "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]", "REWARD POINTS", "CONFIRM CHANGES"],
-    },
-    "BLOOD BANK SEARCH": {
-      columns: ["DATE","BLOOD BANK NAME", "BLOOD TYPE", "AMOUNT OF BLOOD"],
-    },
-  };
-
-  const tableData = tables[tableName];
-
-  if (!tableData) {
-    return <div>No table found</div>;
-  }
-
-  
-  const { columns } = tableData;
-  const rows = generateRows(tableName, numRows);
-
-  
-  return (
-    <div>
-      <div className="tablecover">
-      <h2 className="tablename">{tableName}</h2>
-      
-      {(tableName === 'DONOR SEARCH' || tableName === 'BLOOD BANK SEARCH')  && (
-     <div className='search'>
-      <input
-        type="text"
-        placeholder="Search" />
-        </div>
-)}
-      <table className="tablemain">
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <th key={index}>{column}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {Object.values(row).map((cell, cellIndex) => (
-                <td key={cellIndex}>{cell}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-      {tableName === 'DONOR SEARCH' && (
-      <button className="submitbutton">Submit</button>
-    )}
-    </div>
-  );
-}
-
-function generateRows(tableName) {
-  const rows = [];
-
-  switch (tableName) {
-
-    case "DONOR HISTORY":
-      const nicValues = ["NIC1", "NIC2", "NIC3", "NIC4"];
-      const dateValues=["1/2/12","8","8/9/10","9"];
-      const bloodValues=["a"];
-      const quantityValues=[1,2,3,3];
-      const numRows=20;
-      for (let i = 0; i < numRows; i++) {
-        const row = {
-          "NIC": nicValues[i],
-          "DATE OF DONATION": dateValues[i],
-          "BLOOD TYPE":  bloodValues[i],
-          "QUANTITY OF BLOOD DONATED IN PINTS": quantityValues[i],
-        };
-        rows.push(row);
-      }
-      break;
-
-      case "DONOR SEARCH":
-
-        const nameD = ["monaragala", "moratuwa"];
-        const telephone = ["11"];
-        const numberofRows = 2;
-        const NIC=[""];
-        const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-        const locationInput = <input type="text" />;
-        const amountInput = <input type="number" min="0"/>;
-        const reward = <input type="number"  min="0" />;
-          
-        for (let i = 0; i < numberofRows; i++) {
-          const row = {
-            "NIC OF DONOR": NIC[i],
-            "NAME OF DONOR": nameD[i],
-            "TELEPHONE DETAILS": telephone[i],
-            "ENTER BLOOD TYPE": (
-              <select>
-                {bloodTypes.map((type, index) => (
-                  <option key={index} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            ),
-            "ENTER LOCATION OF BLOOD BANK": locationInput,
-            "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]": amountInput,
-            "REWARD POINTS": reward,
-            "ACTION": (
-              <button>Confirm Changes</button>
-            ),
-          }; 
-          rows.push(row);
-        }
-        
-        console.log(rows);
-        
-        break;
-        
-      
-        case "BLOOD BANK SEARCH":
-      const date_b = ["8th", "8", "9", "9"];
-      const name_b=["monaragala","moratuwa"];
-      const bloodtype_b=["a"];
-      const quantity_b=[1,2,3,3];
-      const numberofrows=9;
-      for (let i = 0; i < numberofrows; i++) {
-        const row = {
-          "DATE":date_b[i],
-          "BLOOD BANK NAME": name_b[i],
-          "BLOOD TYPE": bloodtype_b[i],
-          "AMOUNT OF BLOOD": quantity_b[i]
-        };
-        rows.push(row);
-      }
-      break;
-  }
-
-  return rows;
-}
-
-
-
-export default Table;
-*//*
-
-import React from 'react';
+import React,{useState,useEffect}from 'react';
 import './Table.css';
 import Dropdown from './Dropdown';
+import { TableNames } from "./utils/Enums";
+import { DropDown } from "./utils/Enums";
+import { validateForm, validateField } from './Validation';
 
-const TableNames = {
-  DONORHISTORY: "DONOR HISTORY",
-  DONORSEARCH: "DONOR SEARCH",
-  BLOODBANKSEARCH: "BLOOD BANK SEARCH",
-  DONORLOCATION:"DONOR LOCATION",
-};
 
-function Table({ tableName, numRows }) {
+
+function Table({ tableName }) {
+
+  const [inputValueArray, setInputValueArray] = useState([]);
+  const [errors, setErrors] = useState({});
+  const [dropdownValues, setDropdownValues] = useState({
+    bloodtypedropdown: '',
+    districtdropdown: '',
+   
+  });
+
+  const handleDropdownChange = (event, dropdownName) => {
+    const value = event.target.value;
+    setDropdownValues((prevState) => ({
+      ...prevState,
+      [dropdownName]: value,
+    }));
+  };
+
+  const bloodTypeValue = dropdownValues.bloodtypedropdown;
+  const districtValue = dropdownValues.districtdropdown;
+  
+  /*console.log(bloodTypeValue,districtValue);*/
+
+  const handleChange = (event, index) => {
+    const value = event.target.value;
+    setInputValueArray((prevState) => {
+      const newState = [...prevState];
+      newState[index] = value;
+      return newState;
+    });
+    
+    
+  };
+
+  const handleSubmit = (index) => {
+    const startIndex = index * 4;
+    const rowValues = inputValueArray.slice(startIndex, startIndex + 4);
+    console.log(`Submit button clicked for index ${index + 1}`);
+    console.log(rowValues[0], rowValues[1], rowValues[2], rowValues[3]);
+
+    const formValues = {
+      date: rowValues[0] || '',type: rowValues[1] || '',pints: rowValues[2] || '', reward: rowValues[3] || '',
+    };
+
+    const currentPage = tableName;
+
+    const forms = [
+      {
+        formName: currentPage,
+        requiredFields: ['pints', 'reward', 'type', 'date'],
+      },
+    ];
+
+    const newErrors = validateForm(forms, currentPage, formValues);
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [`row${index}`]: newErrors,
+    }));
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log(formValues); // Take values from here
+    } else {
+      console.log('error');
+    }
+  };
+
   const tables = {
     [TableNames.DONORHISTORY]: {
-      columns: ["NIC", "DATE OF DONATION", "BLOOD TYPE", "QUANTITY OF BLOOD DONATED IN PINTS"],
+      columns: ["DATE OF DONATION", "BLOOD TYPE", "QUANTITY OF BLOOD DONATED IN PINTS","NAME OF BLOOD BANK", "LOCATION OF BLOOD BANK","CONTACT DETAILS"],
     },
     [TableNames.DONORLOCATION]:{
-      columns: ["NAME OF BLOOD BANK","CONTACT DETAILS","ADDRESS"],
+      columns: ["NAME OF BLOOD BANK","CONTACT DETAILS","DISTRICT","ADDRESS"],
     },
     [TableNames.DONORSEARCH]: {
-      columns: ["NIC OF DONOR", "NAME OF DONOR", "TELEPHONE DETAILS", "ENTER BLOOD TYPE", "ENTER LOCATION OF BLOOD BANK", "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]", "REWARD POINTS", "ACTION"],
+      columns: ["NIC OF DONOR","DATE OF DONATION", "NAME OF DONOR", "TELEPHONE DETAILS", "ENTER BLOOD TYPE", "ENTER LOCATION OF BLOOD BANK", "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]", "REWARD POINTS", "CONFIRM CHANGES"],
     },
     [TableNames.BLOODBANKSEARCH]: {
-      columns: ["DATE", "BLOOD BANK NAME", "BLOOD TYPE", "AMOUNT OF BLOOD"],
+      columns: ["BLOOD BANK NAME", "BLOOD TYPE", "AMOUNT OF BLOOD","LOCATION","CONTACT DETAILS"],
+    },
+    [TableNames.BLOODBANKPENDING]: {
+      columns: ["NAME OF BLOOD BANK", "TELEPHONE NUMBER", "LOCATION", "ACTION"],
+    },
+    [TableNames.BLOODBANKACCEPTED]: {
+      columns: ["NAME OF BLOOD BANK", "TELEPHONE NUMBER", "LOCATION", "ACTION"],
+    },
+    [TableNames.HOSPITALACCEPTED]: {
+      columns: ["NAME OF HOSPITAL", "TELEPHONE NUMBER", "LOCATION", "ACTION"],
+    },
+    [TableNames.HOSPITALPENDING]: {
+      columns: ["NAME OF HOSPITAL", "TELEPHONE NUMBER", "LOCATION", "ACTION"],
     },
   };
 
@@ -186,26 +108,47 @@ function Table({ tableName, numRows }) {
   }
 
   const { columns } = tableData;
-  const rows = generateRows(tableName, numRows);
-
-
+ 
+  let rows;
+  if (tableName === TableNames.DONORSEARCH) {
+    rows = generateRows(tableName, inputValueArray, setInputValueArray, handleChange, handleSubmit,errors);
+  } else {
+    rows = generateRows(tableName, null, null,null,null,null);
+  }
 
   return (
     <div>
-      <div className="tablecover">
+    
         <h2 className="tablename">{tableName}</h2>
-
+        
+        <div className="tablecover">
         {(tableName === TableNames.DONORSEARCH) && (
-          <div className="search">
-            <input type="text" placeholder="Search" />
-          </div>
+            <input type="text" placeholder="Please type a donor name..." className="search" />
         )}
-           {(tableName === TableNames.BLOODBANKSEARCH) && (
-          <div>
-            <Dropdown dropdown='districtdropdown' />
-            <Dropdown dropdown='bloodtypedropdown' />
+         {(tableName === TableNames.BLOODBANKSEARCH) && (
+          <div className="row-container">
+            <div className='dropdown5'>
+            <Dropdown dropdown={DropDown.DISTRICTDROPDOWN} value={dropdownValues.districtdropdown}
+            onChange={(event) => handleDropdownChange(event, DropDown.DISTRICTDROPDOWN)} />
+            </div>
+            <div className='dropdown4'>
+            <Dropdown dropdown={DropDown.BLOODTYPEDROPDOWN} value={dropdownValues.bloodtypedropdown}
+            onChange={(event) => handleDropdownChange(event,DropDown.BLOODTYPEDROPDOWN)}/>
+            </div>
+            <button className='submit3'>Submit</button>
           </div>
-        )}
+          )}
+      {(tableName === TableNames.DONORLOCATION) && (
+      <div className="row-container">
+        <div className='dropdown3'>
+        <Dropdown dropdown={DropDown.DISTRICTDROPDOWN} value={dropdownValues.districtdropdown} onChange={(event) => handleDropdownChange(event, DropDown.DISTRICTDROPDOWN) } />
+        </div>
+        <div>
+           <button className='submit2'>Submit</button>
+         </div>
+
+        </div>
+          )}
 
         <table className="tablemain">
           <thead>
@@ -215,313 +158,198 @@ function Table({ tableName, numRows }) {
               ))}
             </tr>
           </thead>
+          {rows.length === 0 ? (
+          <p className="norows">No rows found</p>
+        ) : (
+          <>
           <tbody>
             {rows.map((row, rowindex) => (
               <tr key={rowindex}>
                 {Object.values(row).map((cell, cellindex) => (
-                  <td key={cellindex}>{cell}</td>
+                  <td key={cellindex}><div className='multiline-cell'>{cell}</div></td>
                 ))}
-              </tr>
+              </tr>    
             ))}
-          </tbody>
+         </tbody>
+          </>
+        )}
         </table>
       </div>
-      {tableName === TableNames.DONORSEARCH && (
-        <button className="submitbutton">Submit</button>
-      )}
     </div>
   );
 }
 
-function generateRows(tableName) {
+function generateRows(tableName, inputValueArray,setInputValueArray, handleChange, handleSubmit,errors) {
   const rows = [];
 
+
   if (tableName === TableNames.DONORHISTORY) {
-    const nicValues = ["NIC1", "NIC2", "NIC3", "NIC4"];
-    const dateValues = ["1/2/12", "8", "8/9/10", "9"];
-    const bloodValues = ["a"];
-    const quantityValues = [1, 2, 3, 3];
-    const numRows = 20;
+    const dateValues = ["1/2/12", "8/9/10"];
+    const bloodValues = ["A+","A+"];
+    const quantityValues = [1,2];
+    const location=["Moratuwa","Moratuwa"];
+    const nameofbloodbank=["Moratuwa Blood Bank","Moratuwa Blood Bank"];
+    const contactdetails=["0000000000","1111111111"];
+    const numRows = 2;
     for (let i = 0; i < numRows; i++) {
       const row = {
-        "NIC": nicValues[i],
         "DATE OF DONATION": dateValues[i],
         "BLOOD TYPE": bloodValues[i],
-        "QUANTITY OF BLOOD DONATED IN PINTS": quantityValues[i],
+        "QUANTITY OF BLOOD DONATED IN PINTS": quantityValues[i] + " pints",
+        "NAME OF BLOOD BANK":nameofbloodbank[i],
+        "LOCATION OF BLOOD BANK":location[i],
+        "CONTACT DETAILS":contactdetails[i],
       };
       rows.push(row);
     }
   } else if (tableName === TableNames.DONORLOCATION) {
-      const namebloodbank = [ "Narahempital Bloodbank"];
-      const contact= ["0999999", "822222"];
-      const address = ["a"];
-      const numRows = 20;
+      const namebloodbank = [ "Ampara Bloodbank"];
+      const contact= ["0999999999"];
+      const district=["Ampara"];
+      const address = ["abc"];
+      const numRows = 1;
       for (let i = 0; i < numRows; i++) {
         const row = {
           "NAME OF BLOOD BANK": namebloodbank[i],
           "CONTACT DETAILS":contact[i],
+          "DISTRICT":district[i],
           "ADDRESS": address[i],
         };
         rows.push(row);
       }
   } else if (tableName === TableNames.DONORSEARCH) {
-    const nameD = ["monaragala", "moratuwa"];
-    const telephone = ["11"];
+    const name = ["Andy Bently", "Andy Cody"];
+    const telephone = ["1111111111","2222222222"];
     const numberofRows = 2;
-    const NIC = [""];
-    const locationInput = <input type="text" />;
-    const amountInput = <input type="number" min="0" />;
-    const reward = <input type="number" min="0" />;
-
-    for (let i = 0; i < numberofRows; i++) {
+    const NIC = ["1111111111","2222222222"];
+    const locationInput = ["Bambalapitiya","Maharagama"];
+    for (let i = 0; i < numberofRows; i++) {     
+      const rowErrors = errors[`row${i}`] || {};
       const row = {
         "NIC OF DONOR": NIC[i],
-        "NAME OF DONOR": nameD[i],
+        "DATE OF DONATION": <>
+        <input  type="date" name="date" value={inputValueArray[i * 4] || ''} onChange={(event) => handleChange(event, i * 4)} />
+        {/*{rowErrors.date && <div style={{ color: 'red' }}>{rowErrors.date}</div>}*/}
+        {rowErrors['date'] && <div style={{ color: 'red' }}>{rowErrors['date']}</div>}
+        </>,
+        "NAME OF DONOR": name[i],
         "TELEPHONE DETAILS": telephone[i],
         "ENTER BLOOD TYPE": 
-       <Dropdown dropdown='bloodtypedropdown' />,
-        
-        "ENTER LOCATION OF BLOOD BANK": locationInput,
-        "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]": amountInput,
-        "REWARD POINTS": reward,
-        "ACTION": (
-          <button>Confirm Changes</button>
+        <> 
+        <div className="dropdown6">
+        <Dropdown dropdown='bloodtypedropdown' value={inputValueArray[i * 4 + 1] || ''} onChange={(event) => handleChange(event, i * 4 + 1)} /></div>
+       {rowErrors.type && <div style={{ color: 'red' }}>{rowErrors.type}</div>}
+        </>,
+        "ENTER LOCATION OF BLOOD BANK": locationInput[i],
+        "ENTER AMOUNT OF BLOOD DONATED [IN PINTS]":  <>
+        <input type="number" min="0" value={inputValueArray[i * 4 + 2] || ''} onChange={(event) => handleChange(event, i * 4 + 2)}/>
+       {rowErrors.pints && <div style={{ color: 'red' }}>{rowErrors.pints}</div>} 
+        </>,
+        "REWARD POINTS":<>
+        <input
+       type="number"
+       min="0"
+       value={inputValueArray[i * 4 + 3] || ''}
+       onChange={(event) => handleChange(event, i * 4 + 3)}
+        />
+       {rowErrors.reward && <div style={{ color: 'red' }}>{rowErrors.reward}</div>} 
+       </>
+      ,
+        "CONFIRM CHANGES": (
+          <button className='submitbutton' onClick={() => handleSubmit(i)} type="submit" >Submit</button> 
         ),
       };
       rows.push(row);
     }
   } else if (tableName === TableNames.BLOODBANKSEARCH) {
-    const date_b = ["8th", "8", "9", "9"];
-    const name_b = ["monaragala", "moratuwa"];
-    const bloodtype_b = ["a"];
-    const quantity_b = [1, 2, 3, 3];
-    const numberofrows = 9;
+    const name = ["monaragala blood bank 1", "monaragala blood bank 2"];
+    const bloodtype= ["A+","A+"];
+    const quantity = [1, 2];
+    const contactdetails=["02222222222","1000000000"];
+    const location=["Monaragala","Monaragala"];
+    const numberofrows = 2;
     for (let i = 0; i < numberofrows; i++) {
       const row = {
-        "DATE": date_b[i],
-        "BLOOD BANK NAME": name_b[i],
-        "BLOOD TYPE": bloodtype_b[i],
-        "AMOUNT OF BLOOD": quantity_b[i],
+        "BLOOD BANK NAME": name[i],
+        "BLOOD TYPE": bloodtype[i],
+        "AMOUNT OF BLOOD": quantity[i]+" pints",
+        "LOCATION":location[i],
+        "CONTACT DETAILS":contactdetails[i],
+      };
+      rows.push(row);
+    }
+  }
+  else if (tableName === TableNames.BLOODBANKPENDING) {
+    const name_b = ["bloodbank1", "bloodbank2", "bloodbank3"];
+    const telephone_b = ["1212121212", "2323232323","1212121212"];
+    const location_b = ["location1","location2","location3"]; 
+    const acceptbtn_b=<button className='acceptBtn'>ACCEPT</button>
+    const declinebtn_b=<button className='declineBtn'>DECLINE</button>
+    const numberofrows = 3;
+    for (let i = 0; i < numberofrows; i++) {
+      const row = {
+        "NAME OF BLOOD BANK": name_b[i],
+        "TELEPHONE NUMBER": telephone_b[i],
+        "ADDRESS": location_b[i],
+        "ACTION":<div className='acceptAndDeclineBtn'><div>{acceptbtn_b}</div><div>{declinebtn_b}</div></div>
+      };
+      rows.push(row);
+    }
+  }
+ 
+  else if (tableName === TableNames.HOSPITALPENDING) {
+    const name_b = ["hospital1", "hospital2", "hospital3"];
+    const telephone_b = ["1212121212", "2323232323","1212121212"];
+    const location_b = ["location1","location2","location3"]; 
+    const acceptbtn_b=<button className='acceptBtn'>ACCEPT</button>
+    const declinebtn_b=<button className='declineBtn'>DECLINE</button>
+    const numberofrows = 3;
+    for (let i = 0; i < numberofrows; i++) {
+      const row = {
+        "NAME OF BLOOD BANK": name_b[i],
+        "TELEPHONE NUMBER": telephone_b[i],
+        "ADDRESS": location_b[i],
+        "ACTION":<div className='acceptAndDeclineBtn'><div>{acceptbtn_b}</div><div>{declinebtn_b}</div></div>,
+      };
+      rows.push(row);
+    }
+  }
+  else if (tableName === TableNames.HOSPITALACCEPTED) {
+    const name_b = ["hospital4", "hospital5", "hospital6"];
+    const telephone_b = ["1212121212", "2323232323","1212121212"];
+    const location_b = ["location1","location2","location3"]; 
+    const declinebtn_b=<button className='declineBtn'>DECLINE</button>
+    const numberofrows = 3;
+    for (let i = 0; i < numberofrows; i++) {
+      const row = {
+        "NAME OF BLOOD BANK": name_b[i],
+        "TELEPHONE NUMBER": telephone_b[i],
+        "ADDRESS": location_b[i],
+        "ACTION":declinebtn_b,
+      };
+      rows.push(row);
+    }
+  }
+  else if (tableName === TableNames.BLOODBANKACCEPTED) {
+    const name_b = ["bloodbank1", "bloodbank2", "bloodbank3"];
+    const telephone_b = ["1212121212", "2323232323","1212121212"];
+    const location_b = ["location1","location2","location3"]; 
+    const declinebtn_b=<button className='declineBtn'>DECLINE</button>
+    const numberofrows = 3;
+    for (let i = 0; i < numberofrows; i++) {
+      const row = {
+        "NAME OF BLOOD BANK": name_b[i],
+        "TELEPHONE NUMBER": telephone_b[i],
+        "ADDRESS": location_b[i],
+        "ACTION":declinebtn_b,
       };
       rows.push(row);
     }
   }
 
-  return rows;
-}
-
-
-export default Table;
-*/
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Table.css';
-
-function Table({ tableName }) {
-  const [name, setName] = useState('');
-  const [data, setChoice] = useState([]);
-  const [date, setDate] = useState([]);
-  const [quantity, setQuantity] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [bloodtype, setBloodType] = useState([]);
-  const [NIC, setNIC] = useState([]);
-  const [username, setUsername] = useState([]);
-  const [telephone, setTelephone] = useState([]);
-
-  useEffect(() => {
-    const user = 'Donor';
-    axios
-      .get(`http://localhost:8070/${user}/`)
-      .then((response) => {
-        const responseData = response.data;
-        if (user === 'donation') {
-          const filteredData = responseData.filter((item) => item.name === 'Isuru');
-          const dates = filteredData.map((item) => item.date);
-          const quantities = filteredData.map((item) => item.quantity);
-          const locations = filteredData.map((item) => item.location);
-          const bloodTypes = filteredData.map((item) => item.bloodtype);
-
-          setChoice(filteredData);
-          setDate(dates);
-          setQuantity(quantities);
-          setLocation(locations);
-          setBloodType(bloodTypes);
-        } else if (user === 'Donor') {
-          const filteredData = responseData.filter((item) => item.name.toLowerCase().includes(name));
-          const NICs = filteredData.map((item) => item.NIC);
-          const names = filteredData.map((item) => item.name);
-          const telephones = filteredData.map((item) => item.telephone);
-
-          setNIC(NICs);
-          setUsername(names);
-          setTelephone(telephones);
-        }
-        else if(user === 'bloodBank'){
-          const filteredData = responseData.filter((item) => item.name === 'Isuru');
-          
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [name]);
-
-  const tables = {
-    'DONOR HISTORY': {
-      columns: ['DATE OF DONATION', 'BLOOD TYPE', 'QUANTITY OF BLOOD DONATED IN PINTS', 'LOCATION'],
-    },
-    'DONOR SEARCH': {
-      columns: [
-        'NIC OF DONOR',
-        'NAME OF DONOR',
-        'TELEPHONE DETAILS',
-        'ENTER BLOOD TYPE',
-        'ENTER LOCATION OF BLOOD BANK',
-        'ENTER AMOUNT OF BLOOD DONATED [IN PINTS]',
-        'REWARD POINTS',
-        'CONFIRM CHANGES',
-      ],
-    },
-    'BLOOD BANK SEARCH': {
-      columns: ['Date', 'Blood Bank Name', 'Blood Type', 'Amount Of Blood'],
-    },
-  };
-
-  const tableData = tables[tableName];
-
-  if (!tableData) {
-    return <div>No table found</div>;
-  }
-
-  const { columns } = tableData;
-  const rows = GenerateRows(tableName, name, date, bloodtype, quantity, location, NIC, username, telephone, setLocation, setQuantity);
-
-  return (
-    <div>
-      <div className="tablecover">
-        <h2 className="tablename">{tableName}</h2>
-
-        {(tableName === 'DONOR SEARCH' || tableName === 'BLOOD BANK SEARCH') && (
-          <div>
-            <input type="text" className='search' value={name} onChange={(e) => setName(e.target.value.toLowerCase())} placeholder="Search" />
-          </div>
-        )}
-
-        <table className="tablemain">
-          <thead>
-            <tr>
-              {columns.map((column, index) => (
-                <th key={index}>{column}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {Object.values(row).map((cell, cellIndex) => (
-                  <td key={cellIndex}>{cell}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function GenerateRows(tableName, name, date, bloodtype, quantity, location, NIC, username, telephone, setLocation, setQuantity) {
-  const rows = [];
-
-  const filteredData = username.filter((username) => username.toLowerCase().includes(name.toLowerCase()));
-
-  const [quantity2, setQuantity2] = useState('');
-  const [location2, setLocation2] = useState('');
-
-  function sendData(e,user) {
-    e.preventDefault();
-    const newdonation = {
-      name:user,
-      quantity:quantity2,
-      location:location2,
-    };
-    axios
-      .post('http://localhost:8070/donation/add', newdonation)
-      .then(() => {
-        alert('donation added to the database');
-        alert(name + 'name' + location + 'location');
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    console.log(newdonation);
-  }
-
-  switch (tableName) {
-    case 'DONOR HISTORY':
-      const numRows = date.length;
-      for (let i = 0; i < numRows; i++) {
-        const row = {
-          'DATE OF DONATION': date[i],
-          'BLOOD TYPE': bloodtype[i],
-          'QUANTITY OF BLOOD DONATED IN PINTS': quantity[i],
-          LOCATION: location[i],
-        };
-        rows.push(row);
-      }
-      break;
-
-    case 'DONOR SEARCH':
-      const numberofRows = filteredData.length;
-      const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
-      const locationInput = <input type="text" onChange={(e) => setLocation2(e.target.value)} />;
-      const amountInput = <input type="number" min="0" onChange={(e) => setQuantity2(e.target.value)} />;
-      const reward = <input type="number" min="0" />;
-
-      for (let i = 0; i < numberofRows; i++) {
-        const username2 = username[i]
-        const row = {
-          'NIC OF DONOR': NIC[i],
-          'NAME OF DONOR': username[i],
-          'TELEPHONE DETAILS': telephone[i],
-          'ENTER BLOOD TYPE': (
-            <select>
-              {bloodTypes.map((type, index) => (
-                <option key={index} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          ),
-          'ENTER LOCATION OF BLOOD BANK': locationInput,
-          'ENTER AMOUNT OF BLOOD DONATED [IN PINTS]': amountInput,
-          'REWARD POINTS': reward,
-          'ACTION': <button className="button" onClick={(e)=>sendData(e,username2)}>Confirm Changes</button>,
-        };
-        rows.push(row);
-      }
-      break;
-
-    case 'BLOOD BANK SEARCH':
-      const date_b = ['8th', '8', '9', '9'];
-      const name_b = ['monaragala', 'moratuwa'];
-      const bloodtype_b = ['a'];
-      const quantity_b = [1, 2, 3, 3];
-      const numberofrows = 9;
-      for (let i = 0; i < numberofrows; i++) {
-        const row = {
-          DATE: date_b[i],
-          'BLOOD BANK NAME': name_b[i],
-          'BLOOD TYPE': bloodtype_b[i],
-          'AMOUNT OF BLOOD': quantity_b[i],
-        };
-        rows.push(row);
-      }
-      break;
-  }
 
   return rows;
 }
+
 
 export default Table;
