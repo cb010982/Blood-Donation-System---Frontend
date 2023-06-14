@@ -8,7 +8,7 @@
 }
 
 .loginAndSignupSide{
-  background-color:whitesmoke;
+  background-color: rgb(245, 139, 0);
   width:18%;
 }
 
@@ -32,7 +32,6 @@
   background-color: white;
   padding-top:1.5%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
- 
 }
 .loginandsingupheading{
   text-align: center;
@@ -93,7 +92,7 @@
   margin-right:8px;
 }
 
-.formInputBox{
+.formInputBox,.dropSignLog{
   width:80%;
   padding-left:5px;
   padding-right:10px;
@@ -106,7 +105,7 @@
   transition: background-color 0.3s ease-in-out; 
 }
 
-.formInputBox:hover{
+.formInputBox:hover,.DropSignLog:hover{
 
  background-color: rgba(148, 215, 249, 0.422);
  border-radius: 2px;
@@ -146,123 +145,5 @@
   margin-bottom:4%;
   margin-left: 1%;
  }
-
-
-
-
- @media screen and (min-width: 400px) and (max-width: 700px) {
-  .loginAndSingupContainer{
-    width: 100%;
-    height:auto;
-    padding-top:5%;
-    padding-bottom:5%;
-    }
-
-    .signupContainer{
-      margin-left:3%;
-      margin-right:3%;
-    
-      padding-top:0%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    } 
-
-    .loginandsingupheading{
-      text-align: center;
-      padding-top:14px;
-      font-size:28px;
-     }
-  .loginAndSignupSide{
-   
-    width:0;
-  }
-  .signupformRows{
-    flex-basis: 100%;
-    margin-bottom: 20px; 
-  }
-
-}
-
-@media (max-width: 400px) {
-  .loginAndSingupContainer{
-    width: 100%;
-    height:auto;
-    padding-top:0%;
-    padding-bottom:5%;
-    margin:0;
-   }
-
-   .loginandsingupheading{
-    text-align: center;
-    padding-top:14px;
-    font-size:28px;
-   }
-
-   .signupContainer{
-     margin-left:0%;
-     margin-right:0%;
-     padding-top:0%;
-    } 
-  .loginAndSignupSide{
-    background-color:whitesmoke;
-    width:0;
-  }
-  .signupformRows{
-    flex-basis: calc(100% - 10px); 
-    margin-bottom: 20px; 
-  }
-  
-}
-
-@media screen and (min-width: 700px) and (max-width: 1000px) {
-   .loginandsingupheading{
-    text-align: center;
-    padding-top:14px;
-    font-size:28px;
-   }
-  
-  .loginAndSingupContainer{
-    width: 100%;
-    height:100vh;
-    padding-top:5%;
-    padding-bottom:5%;
-    margin:0;
-   }
-  .loginAndSignupSide{
-    background-color:whitesmoke;
-    width:0;
-  }
-  .signupformRows{
-    flex-basis: calc(50% ); 
-    margin-bottom: 20px; 
-  }
-  .signupContainer{
-    margin-left:3%;
-    margin-right:3%;
-    padding-top:0%;
-   } 
-  
-}
-
-
- /* @media (max-width: 1000px) {
-    .loginAndSingupContainer{
-      width: 100%;
-      height:100vh;
-      padding-top:5%;
-      padding-bottom:5%;
-      margin:0;
-     }
-    .loginAndSignupSide{
-      background-color:whitesmoke;
-      width:0;
-    }
-    .signupformRows{
-      flex-basis: calc(50% - 10px); 
-      margin-bottom: 20px; 
-    }
-    
-  
-  
-}*/
 
 
