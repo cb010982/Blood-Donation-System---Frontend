@@ -1,6 +1,5 @@
 
 .box{
-
   box-shadow: 0 0 10px rgba(197, 194, 194, 0.7);
   width:40%;
   height: 320px;
@@ -13,9 +12,9 @@
   display: flex;
   flex-direction: column;
   position:relative;
-   flex-direction: column;
-align-items: center; /* Add this line to horizontally center the content */
-justify-content: center;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
 }
 
 .border{
@@ -28,11 +27,6 @@ margin-bottom: 10px;
 padding-bottom:150px;
 
 }
-
-.space{
-  margin-top:5%;
-}
-
 
 .paragraph{
  margin-left:27%;
@@ -52,7 +46,6 @@ height:30%;
 position:relative;
 z-index:1;
 animation: moveImage 1.5s ease;
-
 }
 
 @keyframes moveImage {
