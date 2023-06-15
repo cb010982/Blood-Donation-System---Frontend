@@ -3,8 +3,8 @@ import "./Navigation.css";
 import profilepic from "./images/common.png";
 import '@fortawesome/fontawesome-free/css/all.css';
 import { UserTypes } from "./utils/Enums";
-//import { useCookies } from "react-cookie";
-//import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 
 const navigationLinks = {
   [UserTypes.ABOUT]: {
@@ -74,8 +74,8 @@ const navigationLinks = {
 function Navigation(props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [isButtonClicked, setIsButtonClicked] = useState(true);
-  //const [cookies, removeCookie] = useCookies([]);
-  //const history = useHistory();
+  const [cookies, removeCookie] = useCookies([]);
+  const history = useHistory();
 
   const toggleSideBar = () => {
     setIsSideBarOpen(!isSideBarOpen);
@@ -103,9 +103,9 @@ function Navigation(props) {
   }, []);
 
   function handleDashboard(userType, event) {
-   /* event.preventDefault(); 
+   event.preventDefault(); 
     removeCookie("token");
-    history.push("/home")*/
+    history.push("/home")
   }
 
 
@@ -122,42 +122,23 @@ function Navigation(props) {
               <h2 className="myac"> MY ACCOUNT </h2>
               <img src={profilepic} className={navigationLinks[userType].iconClass} />
             </>
-          )}
-
-          {links.map((link, index) => (
-                        <React.Fragment key={index}>
-                        {link.label === "Logout" ? (
-                           <li className="lists">
-                           <a href="#" className="link" onClick={(event) => handleDashboard(userType, event)}>
-                             {link.icon && <i className={link.icon}></i>}
-                             {link.label}
-                           </a>
-                         </li>
-                        ) : (
-                         <li className="lists">
-                         <a href={link.href} className="link">
-                            {link.icon && <i className={link.icon}></i>}
-                            {link.label}
-
-                         </a>
-                      </li>
-                        )}       
-              {link.subLinks && (
-                <>
-                <ul>
-                  {link.subLinks.map((subLink, subIndex) => (
-                    <li className="sublists" key={subIndex}>
-                        <a href={subLink.href} className="link">
-                        {subLink.icon && <i className={subLink.icon}></i>}
-                       {subLink.label}
+          )}{links.map((link, index) => (
+            <React.Fragment key={index}>
+              {link.label === "Logout" ? (
+                 <li className="lists">
+                   <a href="#" className="link" onClick={(event) => handleDashboard(userType, event)}>
+                       <i className={link.icon}></i>
+                       {link.label}
                     </a>
-                 </li>
-                  ))}
-                </ul>
-               
-                </>
-              )}
-              <hr className="navhr" />
+                        </li>
+                        ) : (
+                        <li className="lists">
+                        <a href={link.href} className="link">
+                            <i className={link.icon}></i>
+                            {link.label}
+                        </a>
+                      </li>
+              )}       
             </React.Fragment>
           ))}
         </ul>
@@ -183,4 +164,3 @@ function Navigation(props) {
 }
 
 export default Navigation;
-
