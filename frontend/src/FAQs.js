@@ -1,4 +1,4 @@
-import React, {useState,useRef,useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import './FAQs.css';
 import Navigation from './Navigation';
 
@@ -53,25 +53,14 @@ export default function FAQs() {
   
  ]
 
- {/*const [visibleFaqs, setVisibleFaqs] = useState([]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const oddFaqs = faqList.filter((faq) => faq.id % 2 !== 0);
-      const evenFaqs = faqList.filter((faq) => faq.id % 2 === 0);
-      const sortedFaqs = [...oddFaqs, ...evenFaqs].map((faq) => faq.id);
-      setVisibleFaqs(sortedFaqs);
-    }, 300); // Delay before the first FAQ appears (in milliseconds)
-
-    return () => clearTimeout(timer);
-  }, []);*/}
 
  const [visibleFaqs, setVisibleFaqs] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisibleFaqs(faqList.map((faq, index) => faq.id));
-    }, 50); // Delay before the first FAQ appears (in milliseconds)
+    }, 50); 
 
     return () => clearTimeout(timer);
   }, []);

@@ -1,6 +1,36 @@
 .FAQContainer{
   display: flex;
   justify-content: center;
+  height:100vh;
+  background-color:whitesmoke;
+  
+ 
+}
+.FAQSidenav{
+  flex:1;
+  background-color:whitesmoke;
+}
+
+
+
+.FAQHeadingRow{
+ 
+  padding:10px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Roboto', sans-serif;
+ 
+}
+
+.highlight{
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  color:rgb(0, 0, 0);
+}
+
+.FAQContainer{
+  display: flex;
+  justify-content: center;
  
 }
 .FAQSidenav{
