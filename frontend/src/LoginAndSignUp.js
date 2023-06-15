@@ -376,7 +376,7 @@ export default function LoginAndSignUp(props) {
     event.preventDefault();
     const newErrors = validateForm(forms, currentPage, formValues);
 
-    setErrors(newErrors);
+    setErrors(newErrors); // basiaclly means u are setting errors and u can see all errors at once if no onChange event takes place the empty feilds will show
 
     if (Object.keys(newErrors).length === 0) {
       formSubmitted(formValues, props.page);
