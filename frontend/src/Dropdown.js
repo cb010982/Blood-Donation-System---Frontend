@@ -1,10 +1,6 @@
 import './Dropdown.css';
 import React, { useState } from "react";
-
-const DropDown = {
-  DISTRICTDROPDOWN: "districtdropdown",
-  BLOODTYPEDROPDOWN: "bloodtypedropdown",
-};
+import { DropDown } from "./utils/Enums";
 
 function Dropdown(props) {
   const { value, onChange } = props;
@@ -22,33 +18,33 @@ function Dropdown(props) {
           <select value={selectedOption} onChange={handleSelectChange} className='dropdown' >
           <option hidden value="" className="default">
            Select a district
-          </option> 
-          <option value="1">Ampara</option>
-          <option value="2">Anuradhapura</option>
-          <option value="3">Badulla</option>
-          <option value="4">Batticaloa</option>
-          <option value="5">Colombo</option>
-          <option value="6">Galle</option>
-          <option value="7">Gampaha</option>
-          <option value="8">Hambantota</option>
-          <option value="9">Jaffna</option>
-          <option value="10">Kalutara</option>
-          <option value="11">Kandy</option>
-          <option value="12">Kegalla</option>
-          <option value="13">Kilinochchi</option>
-          <option value="14">Kurunegala</option>
-          <option value="15">Mannar</option>
-          <option value="16">Matale</option>
-          <option value="17">Matara</option>
-          <option value="18">Moneragala</option>
-          <option value="19">Mullaitivu</option>
-          <option value="20">Nuwara Eliya</option>
-          <option value="21">Polonnaruwa</option>
-          <option value="22">Puttalam</option>
-          <option value="23">Ratnapura</option>
-          <option value="24">Trincomalee</option>
-          <option value="25">Vavuniya</option>
-        </select>
+           </option>
+            <option value="Ampara">Ampara</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Colombo">Colombo</option>
+            <option value="Galle">Galle</option>
+            <option value="Gampaha">Gampaha</option>
+            <option value="Hambantota">Hambantota</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Kalutara">Kalutara</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Kegalla">Kegalla</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Kurunegala">Kurunegala</option>
+            <option value="Mannar">Mannar</option>
+            <option value="Matale">Matale</option>
+            <option value="Matara">Matara</option>
+            <option value="Moneragala">Moneragala</option>
+            <option value="Mullaitivu">Mullaitivu</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Polonnaruwa">Polonnaruwa</option>
+            <option value="Puttalam">Puttalam</option>
+            <option value="Ratnapura">Ratnapura</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <option value="Vavuniya">Vavuniya</option>
+          </select>
         </div>
       );
     }
@@ -61,14 +57,14 @@ function Dropdown(props) {
         <option hidden value="" className="default">
            Select a blood type
         </option>   
-        <option value="A+">A+</option>
-        <option value="A-">A-</option>
-        <option value="B+">B+</option>
-        <option value="B-">B-</option>
-        <option value="AB+">AB+</option>
-        <option value="AB-">AB-</option>
-        <option value="O+">O+</option>
-        <option value="O-">O-</option>
+        <option value="aPositive">A+</option>
+        <option value="aNegative">A-</option>
+        <option value="bPositive">B+</option>
+        <option value="bNegative">B-</option>
+        <option value="abPositive">AB+</option>
+        <option value="abNegative">AB-</option>
+        <option value="oPositive">O+</option>
+        <option value="oNegative">O-</option>
       </select>
         </div>
       );
